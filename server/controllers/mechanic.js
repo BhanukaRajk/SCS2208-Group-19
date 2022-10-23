@@ -3,25 +3,25 @@ import Mechanic from "../models/mechanic.js";
 export const addMechanic = (req, res)=>{
     try{
         const newMechenic = new Mechanic({
-            name : req.body.name,
-            location : req.body.loc,
-            email : req.body.email,
-            mobileNo : req.body.mob,
-            type : (req.body.type).split(',')
+            name : req.body.Name,
+            location : req.body.Location,
+            email : req.body.Email,
+            mobileNo : req.body.MobileNo,
+            type : (req.body.Type).split(',')
         });
         newMechenic.save().then(()=>{
             res.send("data saved!");
         }).catch((error)=>{
-            res.send("data not saved");
+            res.send(`data not saved ${error}`);
         })
     }catch(error){
         res.status(400).send("Cannot add data !");
     }
 }
 
-export const findByName = async(req,res)=>{
+export const findById = async(req,res)=>{
     try{
-        const mechanic = await Mechanic.findOne({"name":req.params.name});
+        const mechanic = await Mechanic.findOne({"_id":req.params.id});
         res.status(200).send(mechanic);
     }catch(error){
         res.status(400).send("Cannot get data !");
@@ -45,7 +45,7 @@ export const updateMechanic = async(req,res)=>{
         mechanic.save().then(()=>{
             res.send("data updated!");
         }).catch((error)=>{
-            res.send("data not updated!");
+            res.send(`data not updated! ${error}`);
         })
     }catch(error){
         res.status(400).send("Cannot add data !");
@@ -54,8 +54,8 @@ export const updateMechanic = async(req,res)=>{
 
 export const deleteUser = async(req,res)=>{
     try{
-        const mechanic = await Mechanic.findOne({"name":req.params.name});
-        Mechanic.deleteOne({"name":mechanic.name}).then(()=>{
+        // const mechanic = await Mechanic.findOne({"name":req.params.name});
+        Mechanic.deleteOne({"name":req.params.name}).then(()=>{
             res.status(200).send("data deleted!");
         }).catch((error)=>{
             res.send("data not deleted!");

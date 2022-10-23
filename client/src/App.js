@@ -3,8 +3,9 @@ import MechanicDash from './components/admin/MechanicDash';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <MechanicDash />
+      {/* <Client /> */}
     </div>
   );
 }
