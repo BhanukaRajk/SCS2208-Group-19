@@ -1,4 +1,5 @@
 import mechanic from "./routes/mechanicRouter.js";
+import serviceSchedule from "./routes/serviceScheduleRouter.js";
 import repair from "./routes/repairJobsRouter.js";
 import Express from "express";
 import bodyParser from "body-parser";
@@ -16,11 +17,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+
 app.use('/repair', repair);
 app.use("/mechanic", mechanic);
 app.use("/admin", admin);
+app.use('/serviceSchedule',serviceSchedule);
 
 const CONNECTION_url = `mongodb+srv://${username}:${passwd}@cluster0.tfcjplj.mongodb.net/?retryWrites=true&w=majority`;
+
 
 mongoose
     .connect(CONNECTION_url, {
@@ -29,6 +33,7 @@ mongoose
     })
     .then(() => console.log("connection is established and running"))
     .catch((err) => console.log(err.message));
+
 
 app.listen(process.env.PORT || 3001, () =>
     console.log("server started on port 3001")
