@@ -1,18 +1,27 @@
 import './App.css';
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
 import MechanicDash from './components/admin/MechanicDash';
 import AddRequest from "./components/repairs/AddRequest";
 import MyRequests from "./components/repairs/MyRequests";
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import ServiceSchduleDash from "./components/serviceSchdule/ServiceSchduleDash";
+import HomePage from './components/Home/HomePage';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
+import Navbar from "./components/Home/Navbar";
 
 function App() {
   return (
       <BrowserRouter>
+          <Navbar />
           <Routes>
               <Route path="/admin/mechanic" element={<MechanicDash />} />
               <Route path="/repairs/addrequest" element={<AddRequest />} />
               <Route path="/repairs/myrequests" element={<MyRequests />} />
               <Route path="/serviceSchdule" element={<ServiceSchduleDash />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/" element={<HomePage />} />
           </Routes>
       </BrowserRouter>
   );

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState} from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 
 const MechanicAddForm = ({ getData, setToggler }) => {
@@ -41,36 +41,37 @@ const MechanicAddForm = ({ getData, setToggler }) => {
         setMobile("")
         setType("")
     }
-  return (
-    <div>
-          <form className='container w-75'>
-              <div className="mb-3">
-                  <label className="form-label">Name</label>
-                  <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />
-              </div>
-              <div className="mb-3">
-                  <label className="form-label">Location</label>
-                  <input type="text" className="form-control" onChange={(e) => { setLocation(e.target.value) }} value={location} />
-              </div>
-              <div className="mb-3">
-                  <label className="form-label">Email</label>
-                  <input type="text" className="form-control" onChange={(e) => { setEmail(e.target.value) }} value={email} />
-              </div>
-              <div className="mb-3">
-                  <label className="form-label">Mobile no</label>
-                  <input type="text" className="form-control" onChange={(e) => { setMobile(e.target.value) }} value={mobile} />
-              </div>
-              <div className="mb-3">
-                  <label className="form-label">Type</label>
-                  <input type="text" className="form-control" onChange={(e) => { setType(e.target.value) }} value={type} />
-              </div>
-
-              <button type="submit" className="btn btn-primary" onClick={addData}>Submit</button>
-              <button type="button" className="btn btn-warning" onClick={clearForm}>clear</button>
-          </form>
-          <br /><br />
-    </div>
-  )
+    return (
+        <div>
+            <form className='container w-75'>
+                <div className="mb-3">
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Location</label>
+                    <input type="text" className="form-control" onChange={(e) => { setLocation(e.target.value) }} value={location} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Email</label>
+                    <input type="text" className="form-control" onChange={(e) => { setEmail(e.target.value) }} value={email} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Mobile no</label>
+                    <input type="text" className="form-control" onChange={(e) => { setMobile(e.target.value) }} value={mobile} />
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Type</label>
+                    <input type="text" className="form-control" onChange={(e) => { setType(e.target.value) }} value={type} />
+                </div>
+                <div className='d-flex'>
+                    <button type="submit" className="btn btn-success m-2" onClick={addData}>Submit</button>
+                    <button type="button" className="btn btn-warning m-2" onClick={clearForm}>clear</button>
+                </div>
+            </form>
+            <br /><br />
+        </div>
+    )
 }
 
 export default MechanicAddForm
