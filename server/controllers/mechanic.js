@@ -42,7 +42,7 @@ export const findAllMechenics = async (req, res) => {
 
 export const updateMechanic = async (req, res) => {
     try {
-        const mechanic = await Mechanic.findOne({ name: req.params.name });
+        const mechanic = await Mechanic.findOne({ "_id": req.params.id });
         Object.assign(mechanic, req.body);
 
         mechanic
@@ -60,7 +60,7 @@ export const updateMechanic = async (req, res) => {
 
 export const deleteMechanic = (req, res) => {
     try {
-        Mechanic.deleteOne({ name: req.params.name })
+        Mechanic.deleteOne({ "_id": req.params.id })
             .then(() => {
                 res.status(200).send("data deleted!");
             })

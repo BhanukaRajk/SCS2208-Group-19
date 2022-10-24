@@ -15,8 +15,8 @@ router.get("/id/:id", findMechanicById);
 
 router.post("/", addMechanic);
 
-router.patch("/name/:name", updateMechanic);
+router.patch("/id/:id", updateMechanic);
 
-router.delete("/:name", deleteMechanic);
+router.delete("/:id", deleteMechanic);
 
 export default router;

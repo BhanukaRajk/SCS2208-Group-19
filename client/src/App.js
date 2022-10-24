@@ -6,7 +6,7 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/admin/mechanic" element={<MechanicDash />} />
+                <Route path="/admin/mechanic/*" element={<MechanicDash />} />
             </Routes>
             {/* <Client /> */}
         </BrowserRouter>

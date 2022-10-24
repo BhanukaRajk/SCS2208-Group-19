@@ -1,23 +1,29 @@
 import { useState, useEffect } from 'react'
+import DelButton from './DelButton'
 import axios from 'axios'
 import './mechanic.css'
+import MechanicAddForm from './MechanicAddForm'
+import MechanicUpdateForm from './MechanicUpdateForm'
 
 const MechanicDash = () => {
 
     // data set
     const [data, setData] = useState([])
+    const [upData, setUpData] = useState({});
 
-    // states for form
-    const [name, setName] = useState("")
-    const [location, setLocation] = useState("")
-    const [email, setEmail] = useState("")
-    const [mobile, setMobile] = useState("")
-    const [type, setType] = useState("")
+    // toggler
+    const [toggler, setToggler] = useState(0);
+    const [updateToggler, setUpdateToggler] = useState(0);
 
     // load data in reload
     useEffect(() => {
         getData()
-    }, [])
+    }, [data])
+
+
+    const toggleForm = () => {
+        setToggler(toggler ? 0 : 1)
+    }
 
     // Get all data from server
     const getData = () => {
@@ -31,89 +37,79 @@ const MechanicDash = () => {
             });
     }
 
-    // Add data to the server
-    const addData = (event) => {
-        event.preventDefault()
-        axios.post('http://localhost:3001/mechanic', {
-            "Name": name,
-            "Location": location,
-            "Email": email,
-            "MobileNo": mobile,
-            "Type": type
-        })
+    // to delete a data
+    const deleteRow = (id) => {
+        axios.delete('http://localhost:3001/mechanic/' + id)
             .then((response) => {
                 console.log(response.data)
-                clearForm()
-                getData()
+                setData(data => data.filter((x) => x._id != id))
             })
             .catch((error) => {
-                console.log("Error " + error)
-            });
-
+                console.log(error)
+            })
     }
 
-    // Clear the form
-    const clearForm = () => {
-        setName("")
-        setLocation("")
-        setEmail("")
-        setMobile("")
-        setType("")
+    // update function
+    const updateRow = (singleData) => {
+        setUpData(singleData)
+        setUpdateToggler(1)
+        // console.log(upData)
     }
 
     return (
         <div className='container w-100'>
             <br />
-            <form className='container w-75'>
-                <div className="mb-3">
-                    <label className="form-label">Name</label>
-                    <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Location</label>
-                    <input type="text" className="form-control" onChange={(e) => { setLocation(e.target.value) }} value={location} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Email</label>
-                    <input type="text" className="form-control" onChange={(e) => { setEmail(e.target.value) }} value={email} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Mobile no</label>
-                    <input type="text" className="form-control" onChange={(e) => { setMobile(e.target.value) }} value={mobile} />
-                </div>
-                <div className="mb-3">
-                    <label className="form-label">Type</label>
-                    <input type="text" className="form-control" onChange={(e) => { setType(e.target.value) }} value={type} />
-                </div>
+            {toggler==1 && 
+            <div>
+                <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
+                    <MechanicAddForm getData={getData} setToggler={setToggler}/>
+            </div>}
+            {updateToggler==1 &&
+                <div>
+                    <button className='btn btn-primary' onClick={()=>{setUpdateToggler(0)}}>Show data</button>
+                    <MechanicUpdateForm 
+                            getData={getData} 
+                            setUpdateToggler={setUpdateToggler}
+                            upData={upData} />
+                </div>}
 
-                <button type="submit" className="btn btn-primary" onClick={addData}>Submit</button>
-                <button type="button" className="btn btn-warning" onClick={clearForm}>clear</button>
-            </form>
-            <br /><br />
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Mobile No</th>
-                        <th scope="col">Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((x) =>
-                        <tr key={x.name}>
-                            <th >{x.name}</th>
-                            <td>{x.location}</td>
-                            <td>{x.email}</td>
-                            <td>{x.mobileNo}</td>
-                            <td>{x.type.map(y => <div key={y}>{y}<br /></div>)}</td>
-                        </tr>
+            {(!toggler && !updateToggler) ?
+                <div>
+                    <button className='btn btn-primary' onClick={toggleForm}>Add data</button>
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">name</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Mobile No</th>
+                                <th scope="col">Type</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((x) =>
+                                <tr key={x._id}>
+                                    <th >{x.name}</th>
+                                    <td>{x.location}</td>
+                                    <td>{x.email}</td>
+                                    <td>{x.mobileNo}</td>
+                                    <td>{x.type.map(y => <div key={y}>{y}<br /></div>)}</td>
+                                    <td>
+                                        <button className="btn btn-primary" onClick={() => { updateRow(x) }}>
+                                            Edit
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <DelButton click={deleteRow} id={x._id} />
+                                    </td>
+                                </tr>
+                            )}
 
-                    )}
-
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>:<div></div>}
         </div>
     )
 }
