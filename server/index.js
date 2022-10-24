@@ -1,4 +1,5 @@
 import mechanic from "./routes/mechanicRouter.js";
+import repair from "./routes/repairJobsRouter.js";
 import Express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/mechanic',mechanic);
+app.use('/repair', repair);
 const CONNECTION_url =`mongodb+srv://${username}:${passwd}@cluster0.tfcjplj.mongodb.net/?retryWrites=true&w=majority`;
 
 
