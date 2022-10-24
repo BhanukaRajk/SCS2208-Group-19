@@ -1,71 +1,28 @@
 import Express from "express";
 const router = Express.Router();
-import serviceSchedule from "../models/serviceScheduleModel.js";
-
-// { addServiceSchedule, findById, findAll, updateServiceSchedule, deleteServiceSchedule }
+import {findAll,addService,findServiceByID,deleteServiceSchedule,updateService} from '../controllers/serviceScheduleController.js';
 
 
-router.post('/', (req, res) => {
-
-    const addServiceSchedule = new serviceSchedule({
-        clientName: req.body.cName,
-        clientMobileNo: req.body.cMobileNo,
-        serviceStation: req.body.sStation,
-
-    });
-    addServiceSchedule.save().then(()=>{
-        res.send("Added service schedule successfully!");
-    }).catch((error)=>{
-        res.send(`Service schedule not saved ${error}`);
-    })
-});
+router.get('/', findAll);
 
 
-router.get('/', async(req, res) => {
-    try{
-        const findAllServiceSchedules = await serviceSchedule.find();
-        res.status(200).send(findAllServiceSchedules);
-    }
-    catch(error){
-        res.status(400).send(`There is no such service schedule! ${error}`);
-    }
-});
+// this operation can be used "client"
+router.post('/', addService);
 
 
-
-router.get('/:id', async(req, res) => {
-    try{
-        const findServiceScheduleById = await serviceSchedule.findOne({"_id":req.params.id});
-        res.status(200).send(findServiceScheduleById);
-    }
-    catch(error){
-        res.status(400).send(`There is no such service schedule! ${error}`);
-    }
-});
+// find Service Schedule By Id
+// this operation can be used both "client" and "server station"
+router.get('/:id', findServiceByID);
 
 
-router.delete('/:id', async(req, res) => {
-    try{
-        serviceSchedule.deleteOne({"_id":req.params.id}).then(()=>{
-            res.status(200).send("Service schedule deleted!");
-        }).catch((error)=>{
-            res.status(400).send(`Service schedule not deleted! ${error}`);
-        })    
-    }
-    catch(error){
-        res.status(400).send(`There is no such service schedule! ${error}`);
-    }
-});
+// delete Service Schedule
+// this operation can be used "server station"
+router.delete('/:id',deleteServiceSchedule);
 
 
-
-
-
-
-
-
-
-
+// update Service Schedule
+// this operation can be used both "client" and "server station"
+router.patch('/:id',updateService);
 
 
 
