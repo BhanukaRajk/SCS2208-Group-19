@@ -1,6 +1,6 @@
 import react from "react"
 import axios from "axios";
-import "./AddRequest.css";
+import "./repairs.css";
 
 const repairReq = () => {
 

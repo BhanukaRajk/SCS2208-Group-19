@@ -69,9 +69,9 @@ const MyRequests = () => {
                         <th scope="col">Date</th>
 
                         {/* EDIT BUTTON */}
-                        <th scope="col">Edit</th>
+                        <th scope="col"></th>
                         {/* REMOVE BUTTON */}
-                        <th scope="col">Remove</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
 
