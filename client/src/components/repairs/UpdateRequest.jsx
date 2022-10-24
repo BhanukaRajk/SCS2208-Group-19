@@ -1,70 +1,69 @@
-import react from "react"
-import axios from "axios";
-import "./AddRequest.css";
+import React from "react"
+import Axios from "axios";
+import "./repairs.css";
 
-const repairReq = () => {
+const UpdateClientRequest = ({ showData, setUpdateToggler, thisOne }) => {
 
-
-    const [cname, setName] = react.useState("")
-    const [vlocation, setLocation] = react.useState("")
-    const [mobile, setMobile] = react.useState("")
-    const [model, setModel] = react.useState("")
-
+    const [cname, setClientName] = React.useState(thisOne.cname)
+    const [vlocation, setVehicleLocation] = React.useState(thisOne.vlocation)
+    const [mobile, setClientMobileNo] = React.useState(thisOne.mobile)
+    const [model, setVehicleModel] = React.useState(thisOne.model)
 
 
-    const addData = (event) => {
+    const updateReqData = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:3001/repair', {
+        Axios.patch('http://localhost:3001/repair/id/' + thisOne._id, {
             "Name": cname,
             "Location": vlocation,
             "MobileNo": mobile,
             "Model": model
         })
-            .then((response) => {
-                console.log(response.data)
-                clearForm()
+            .then((res) => {
+                console.log(res.data)
+                clearInputs()
+                showData()
+                setUpdateToggler(0)
             })
-            .catch((error) => {
-                console.log("Error " + error)
+            .catch((err) => {
+                console.log("AN ERROR OCCURRED! \n" + err)
             });
 
     }
 
-    const clearForm = () => {
-        setName("")
-        setLocation("")
-        setMobile("")
-        setModel("")
+    const clearInputs = () => {
+        setClientName("")
+        setVehicleLocation("")
+        setClientMobileNo("")
+        setVehicleModel("")
     }
 
     return (
         <div className="content">
-
             <div>
-                <h3 className="header">Add Emergency Repair Request</h3>
+                <h3 className="header">Update repairing requests</h3>
             </div><br/>
             <div className="mb-2">
                 <label className="form-label">Client Name</label><br/>
-                <input type="text" className="form-control" placeholder="Ex: Nuwan Fernando" onChange={(dynamic) => { setName(dynamic.target.value) }} value={cname} />
+                <input type="text" className="form-control" placeholder="Ex: Nuwan Fernando" onChange={(dynamic) => { setClientName(dynamic.target.value) }} value={cname} />
             </div>
             <div className="mb-2">
                 <label className="form-label">Vehicle location</label><br/>
-                <input type="text" className="form-control" placeholder="Ex: Piliyandala" onChange={(dynamic) => { setLocation(dynamic.target.value) }} value={vlocation} />
+                <input type="text" className="form-control" placeholder="Ex: Piliyandala" onChange={(dynamic) => { setVehicleLocation(dynamic.target.value) }} value={vlocation} />
             </div>
             <div className="mb-2">
                 <label className="form-label">Mobile number</label><br/>
-                <input type="text" className="form-control" placeholder="Ex: 0766877988" onChange={(dynamic) => { setMobile(dynamic.target.value) }} value={mobile} />
+                <input type="text" className="form-control" placeholder="Ex: 0766877988" onChange={(dynamic) => { setClientMobileNo(dynamic.target.value) }} value={mobile} />
             </div>
             <div className="mb-2">
                 <label className="form-label">Vehicle model</label><br/>
-                <input type="text" className="form-control" placeholder="Ex: Honda vezal" onChange={(dynamic) => { setModel(dynamic.target.value) }} value={model} />
+                <input type="text" className="form-control" placeholder="Ex: Honda vezal" onChange={(dynamic) => { setVehicleModel(dynamic.target.value) }} value={model} />
             </div><br/>
 
-            <button type="submit" className="sbtn" onClick={addData}>Submit</button><br/>
-            <button type="button" className="cbtn" onClick={clearForm}>Cancel</button>
+            <button type="submit" className="sbtn" onClick={updateReqData}>Update</button><br/>
+            <button type="button" className="cbtn" onClick={clearInputs}>Cancel</button>
 
         </div>
     )
 }
 
-export default repairReq;
+export default UpdateClientRequest;
