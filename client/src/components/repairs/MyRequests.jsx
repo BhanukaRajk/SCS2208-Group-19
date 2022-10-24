@@ -1,6 +1,5 @@
 import React from 'react'
 import Axios from 'axios'
-import RemoveBtn from '..admin/DelButton'
 import AddRequest from './AddRequest'
 import UpdateRequest from './UpdateRequest'
 
@@ -20,7 +19,7 @@ const MyRequests = () => {
     }, [data])
 
     const showData = () => {
-        Axios.get('http://localhost:3001/repair/client/Binula')/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Axios.get('http://localhost:3001/repair/client/Binula')
             .then((res) => {
                 setData(res.data)
             })
@@ -29,15 +28,15 @@ const MyRequests = () => {
             });
     }
 
-    const updateRow = (singleData) => {
-        setUpData(singleData)
-        console.log(singleData)
+    const updateRow = (ThisRecord) => {
+        setUpData(ThisRecord)
+        console.log(ThisRecord)
         setUpdateToggler(1)
     }
 
 
     const deleteRow = (id) => {
-        Axios.delete('http://localhost:3001/mechanic/' + id)
+        Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
                 console.log(res.data)
                 setData(data => data.filter((item) => item._id !== id))
@@ -98,11 +97,10 @@ const MyRequests = () => {
                                     <td>{record.acceptance.mechanic_mobile}</td>
                                     <td>{record.acceptance.added_date}</td>
 
-                                    {/* <td><button className="btn btn-warning">Edit</button></td> */}
-                                    {/* <td><button className="btn btn-danger">Remove</button></td> */}
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
                                         Edit</button></td>
-                                    <td><RemoveBtn click={deleteRow} id={record._id} /></td>
+                                    <td><button className="btn btn-danger" onClick={() => { deleteRow(record.id) }}>
+                                        Remove</button></td>
 
                                 </tr>
 

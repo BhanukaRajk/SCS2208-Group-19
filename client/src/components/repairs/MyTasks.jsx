@@ -1,6 +1,5 @@
 import React from 'react'
 import Axios from 'axios'
-import RemoveBtn from '..admin/DelButton'
 import AddRequest from './AddRequest'
 import UpdateRequest from './UpdateRequest'
 
@@ -21,9 +20,9 @@ const AcceptedReqs = () => {
     }, [data])
 
     const showData = () => {
-        Axios.get('http://localhost:3001/repair/client/Binula')/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            .then((response) => {
-                setData(response.data)
+        Axios.get('http://localhost:3001/repair/client/Binula')
+            .then((res) => {
+                setData(res.data)
             })
             .catch((error) => {
                 console.log("AN ERROR OCCURRED! \n" + error)
@@ -38,9 +37,9 @@ const AcceptedReqs = () => {
     }
 
     const completeReq = (id) => {
-        Axios.delete('http://localhost:3001/mechanic/' + id)
-            .then((response) => {
-                console.log(response.data)
+        Axios.delete('http://localhost:3001/repair/' + id)
+            .then((res) => {
+                console.log(res.data)
                 setData(data => data.filter((row) => row._id !== id))
             })
             .catch((error) => {
@@ -50,7 +49,6 @@ const AcceptedReqs = () => {
 
 
     return (
-
         <div className='container w-100'>
             <br />
             {toggler === 1 &&
@@ -97,13 +95,10 @@ const AcceptedReqs = () => {
                                     <td>{record.vehicle_model}</td>
                                     <td>{record.acceptance.added_date}</td>
 
-
-                                    {/* <td><button className="btn btn-warning">Edit</button></td> */}
-                                    {/* <td><button className="btn btn-danger">Complete</button></td> */}
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
                                         Edit</button></td>
-                                    <td><RemoveBtn click={completeReq} id={record._id} /></td>
-
+                                    <td><button className="btn btn-danger" onClick={() => { completeReq(record.id) }}>
+                                        Complete</button></td>
                                 </tr>
 
                             )}
