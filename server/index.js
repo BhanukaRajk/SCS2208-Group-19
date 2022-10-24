@@ -1,4 +1,5 @@
 import mechanic from "./routes/mechanicRouter.js";
+import repair from "./routes/repairJobsRouter.js";
 import Express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use('/repair', repair);
 app.use("/mechanic", mechanic);
 app.use("/admin", admin);
 
