@@ -1,4 +1,5 @@
 import mechanic from "./routes/mechanicRouter.js";
+import serviceSchedule from "./routes/serviceScheduleRouter.js";
 import Express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -14,9 +15,11 @@ const app = Express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use('/mechanic',mechanic);
-const CONNECTION_url =`mongodb+srv://${username}:${passwd}@cluster0.tfcjplj.mongodb.net/?retryWrites=true&w=majority`;
 
+app.use('/mechanic',mechanic);
+app.use('/serviceSchedule',serviceSchedule);
+
+const CONNECTION_url =`mongodb+srv://${username}:${passwd}@cluster0.tfcjplj.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.connect (CONNECTION_url, {
     useNewUrlParser: true, useUnifiedTopology: true
