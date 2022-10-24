@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 
 const ClientDashboard = () => {
@@ -13,20 +13,20 @@ const ClientDashboard = () => {
 			.catch((error) => {
 				consoloe.log(`Error: ${error}`);
 			});
-	};
+    };
+    
+    useEffect(() => { getData(); }, []);
 
 	return (
 		<div className="container w-50">
-			<button type="button" onClick={getData} className="btn btn-primary">
-				Find All
-			</button>
 			<table className="table">
 				<thead>
 					<tr>
 						<th scope="col">Name</th>
 						<th scope="col">Email</th>
 						<th scope="col">Mobile Number</th>
-						<th scope="col">Vehicles</th>
+						<th scope="col">Vehicle Number</th>
+						<th scope="col">Vehicle Model</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,7 +38,16 @@ const ClientDashboard = () => {
 							<td>
 								{x.vehicles.map((y) => (
 									<div>
-										{y.vehicleNo} - {y.vehicleModel} <br />
+										{y.vehicleNo}
+										<br />
+									</div>
+								))}
+							</td>
+							<td>
+								{x.vehicles.map((y) => (
+									<div>
+										{y.vehicleModel}
+										<br />
 									</div>
 								))}
 							</td>
