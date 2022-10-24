@@ -1,5 +1,6 @@
 import repair from "../models/repairJobs.js";
 
+
 export const findByClient = async (req, res) => {
     try {
         const repair_request = await repair.find({ "_id": req.params.client_name });
@@ -9,6 +10,7 @@ export const findByClient = async (req, res) => {
     }
 }
 
+
 export const findByMechanic = async (req, res) => {
     try {
         const repair_request = await repair.find({ "_id": req.params.mechanic });
@@ -17,6 +19,7 @@ export const findByMechanic = async (req, res) => {
         res.status(400).send(`ERROR! Couldn't get data - \nerror: ${error}`);
     }
 }
+
 
 export const addRequest = (req, res) => {
     try {
@@ -37,6 +40,7 @@ export const addRequest = (req, res) => {
     }
 }
 
+
 export const acceptRequest = async (req, res) => {
     try {
         const repair_request = await repair.findOne({ "name": req.params.name });
@@ -51,6 +55,7 @@ export const acceptRequest = async (req, res) => {
         res.status(400).send("ERROR! Couldn't update record -");
     }
 }
+
 
 export const completeTask = async (req, res) => {
     try {
