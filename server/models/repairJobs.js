@@ -13,6 +13,7 @@ const repairSchema = mongoose.Schema({
     vehicle_model : String,
     acceptance : {
         acceptedby : String,
+        mechanic_mobile : String,
         added_date : Date
     }
 
