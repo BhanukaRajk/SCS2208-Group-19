@@ -37,19 +37,8 @@ const ServiceSchduleDash = () => {
     }
 
 
-    // const getClientName = (event) => {
-    //     axios.get('http://localhost:3001/client/' + event.target.value)
-    //     .then((response) => {
-    //         setClientName(response.data.clientName)
-    //         setClientMobileNumber(response.data.clientMobileNo)
-    //     })
-    //     .catch((error) => {
-    //         console.log("Error " + error)
-    //     });
-    // }
-
     const getName = () => {
-        axios.get('http://localhost:3001/client')
+        axios.get('http://localhost:3001/mechanic')
         .then((response) => {
             setBinulaData(response.data)
         })
@@ -127,7 +116,7 @@ const ServiceSchduleDash = () => {
 
                         {binulaData.map((item) =>
                             <tr key={item._id}>
-                                <td>{item.clientName}</td>
+                                <td>{item.name}</td>
                             </tr>
                         )}
                     </tbody>
