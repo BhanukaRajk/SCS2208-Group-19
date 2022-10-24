@@ -11,6 +11,7 @@ router.post('/', (req, res) => {
         clientName: req.body.cName,
         clientMobileNo: req.body.cMobileNo,
         serviceStation: req.body.sStation,
+
     });
     addServiceSchedule.save().then(()=>{
         res.send("Added service schedule successfully!");

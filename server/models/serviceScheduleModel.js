@@ -4,7 +4,7 @@ const serviceScheduleSchema = mongoose.Schema({
     clientName:String,
     clientMobileNo:String,
     serviceStation:String,
-    // scheduleTime:Date
+    scheduleTime:Date
 });
 
 const serviceSchedule = mongoose.model('serviceSchedule',serviceScheduleSchema);
