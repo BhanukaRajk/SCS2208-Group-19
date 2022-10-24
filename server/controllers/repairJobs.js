@@ -1,26 +1,26 @@
 import repair from "../models/repairJobs.js";
 
-
+// READ CLIENT REQUESTS FROM CLIENT DASHBOARD
 export const findByClient = async (req, res) => {
     try {
-        const repair_request = await repair.find({ "_id": req.params.client_name });
-        res.status(200).send(repair_request);
+        const clientView = await repair.find({ "client_name": req.params.client });
+        res.status(200).send(clientView);
     } catch (error) {
         res.status(400).send(`ERROR! Couldn't get data - \nerror: ${error}`);
     }
 }
 
-
+// READ CLIENT REQUESTS FROM MECHANICS DASHBOARD
 export const findByMechanic = async (req, res) => {
     try {
-        const repair_request = await repair.find({ "_id": req.params.mechanic });
-        res.status(200).send(repair_request);
+        const mechanicView = await repair.find({ "_id": req.params.mechanic });
+        res.status(200).send(mechanicView);
     } catch (error) {
         res.status(400).send(`ERROR! Couldn't get data - \nerror: ${error}`);
     }
 }
 
-
+// ADD REQUEST BY CLIENT
 export const addRequest = (req, res) => {
     try {
         const newRequest = new repair({
@@ -40,13 +40,13 @@ export const addRequest = (req, res) => {
     }
 }
 
-
+// ACCCEPT REQUEST BY MECHANIC
 export const acceptRequest = async (req, res) => {
     try {
-        const repair_request = await repair.findOne({ "name": req.params.name });
-        Object.assign(repair_request, req.body);
+        const acceptRepair = await repair.findOne({ "name": req.params.name });
+        Object.assign(acceptRepair, req.body);
 
-        repair_request.save().then(() => {
+        acceptRepair.save().then(() => {
             res.send("SUCCESS! Acceptance data saved +");
         }).catch((error) => {
             res.send(`ERROR! \nerror code: ${error}`);
@@ -56,7 +56,7 @@ export const acceptRequest = async (req, res) => {
     }
 }
 
-
+// REMOVE COMPLETED REQUESTS
 export const completeTask = async (req, res) => {
     try {
         repair.deleteOne({ "name": req.params.name }).then(() => {
