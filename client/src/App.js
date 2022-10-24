@@ -1,12 +1,17 @@
-import './App.css';
-import MechanicDash from './components/admin/MechanicDash';
+import "./App.css";
+import MechanicDash from "./components/admin/MechanicDash";
+import ClientDashboard from "./components/admin/ClientDashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <div className="App">
-      <MechanicDash />
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/admin/mechanic" element={<MechanicDash />} />
+				<Route path="/admin/client" element={<ClientDashboard />} />
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
