@@ -17,7 +17,7 @@ const MechanicDash = () => {
     // load data in reload
     useEffect(() => {
         getData()
-    } , [])
+    }, [])
 
     // Get all data from server
     const getData = () => {
@@ -35,21 +35,21 @@ const MechanicDash = () => {
     const addData = (event) => {
         event.preventDefault()
         axios.post('http://localhost:3001/mechanic', {
-            "Name" : name,
-            "Location" : location,
-            "Email" : email,
-            "MobileNo" : mobile,
-            "Type" : type
+            "Name": name,
+            "Location": location,
+            "Email": email,
+            "MobileNo": mobile,
+            "Type": type
         })
-        .then((response) => {
-            console.log(response.data)
-            clearForm()
-            getData()
-        })
-        .catch((error) => {
-            console.log("Error " + error)
-        });
-        
+            .then((response) => {
+                console.log(response.data)
+                clearForm()
+                getData()
+            })
+            .catch((error) => {
+                console.log("Error " + error)
+            });
+
     }
 
     // Clear the form
@@ -67,25 +67,25 @@ const MechanicDash = () => {
             <form className='container w-75'>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
-                    <input type="text" className="form-control" onChange={(e)=>{setName(e.target.value)}} value={name}/>
+                    <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Location</label>
-                    <input type="text" className="form-control" onChange={(e)=>{setLocation(e.target.value)}} value={location}/>
+                    <input type="text" className="form-control" onChange={(e) => { setLocation(e.target.value) }} value={location} />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Email</label>
-                    <input type="text" className="form-control" onChange={(e)=>{setEmail(e.target.value)}} value={email}/>
+                    <input type="text" className="form-control" onChange={(e) => { setEmail(e.target.value) }} value={email} />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Mobile no</label>
-                    <input type="text" className="form-control" onChange={(e)=>{setMobile(e.target.value)}} value={mobile}/>
+                    <input type="text" className="form-control" onChange={(e) => { setMobile(e.target.value) }} value={mobile} />
                 </div>
                 <div className="mb-3">
                     <label className="form-label">Type</label>
-                    <input type="text" className="form-control" onChange={(e)=>{setType(e.target.value)}} value={type}/>
+                    <input type="text" className="form-control" onChange={(e) => { setType(e.target.value) }} value={type} />
                 </div>
-                
+
                 <button type="submit" className="btn btn-primary" onClick={addData}>Submit</button>
                 <button type="button" className="btn btn-warning" onClick={clearForm}>clear</button>
             </form>
