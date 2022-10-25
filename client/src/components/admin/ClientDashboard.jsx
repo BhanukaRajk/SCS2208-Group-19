@@ -80,7 +80,7 @@ const ClientDashboard = () => {
 					<button className="btn btn-primary" onClick={toggleForm}>
 						Add Client
 					</button>
-					<table className="table">
+					<table className="table text-light blur-card">
 						<thead>
 							<tr>
 								<th scope="col">Name</th>

@@ -47,10 +47,10 @@ function App() {
                     <Route path="/admin/dashboard" element={<AdminDashboard />}/>
                     <Route path="/register" element={<Register />} />
                     <Route path="/" exact element={<HomePage />} />
-                    <Route path="/ClientServiceScduleAdd" element={<ClientServiceScduleAdd />}/>
-				            <Route path="/ServiceStationSchduleView" element={<ServiceStationSchduleView />} />
-                    <Route path="/admin/client" element={<AdminClientDashboard />}/>
-                    <Route path="/station" element={<ServiceStation />} />
+                    <Route path="/ClientServiceScduleAdd" element={user.type=='client'?<ClientServiceScduleAdd />:<Login />}/>
+				    <Route path="/ServiceStationSchduleView" element={user.type=='client'?<ServiceStationSchduleView />:<Login />} />
+                    <Route path="/station" element={user.type=='admin'?<ServiceStation />:<Login />} />
+                    <Route path="/admin/client" element={user.type=='admin'?<AdminClientDashboard />:<Login />}/>
                 </Routes>
             </UserContext.Provider>
             </BrowserRouter>

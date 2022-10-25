@@ -20,7 +20,7 @@ const ClientDashboard = () => {
                 <div class="card image justify-content-around blur-card my-3">
                     <img class="card-img-top imageS" src={car4} alt="Card image cap" />
                     <div class="card-body d-flex justify-content-around">
-                        <Link to='/'>
+                            <Link to='/ClientServiceScduleAdd'>
                             <div class="btn btn-dark mx-auto">Add service request</div>
                         </Link>
                     </div>
@@ -44,7 +44,7 @@ const ClientDashboard = () => {
                 <div class="card image justify-content-around blur-card my-3">
                     <img class="card-img-top imageS" src={car7} alt="Card image cap" />
                     <div class="card-body d-flex justify-content-around">
-                        <Link to='/'>
+                            <Link to='/ServiceStationSchduleView'>
                             <div class="btn btn-dark mx-auto">My service requests</div>
                         </Link>
                     </div>

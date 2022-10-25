@@ -29,7 +29,7 @@ const ClientDashboard = () => {
                 <div className="card image justify-content-around blur-card my-3">
                     <img className="card-img-top imageS" src={car5} alt="Card image cap" />
                     <div className="card-body d-flex justify-content-around">
-                        <Link to='/'>
+                            <Link to='/station'>
                             <div className="btn btn-dark mx-auto">Add service station</div>
                         </Link>
                     </div>
@@ -45,7 +45,7 @@ const ClientDashboard = () => {
                 <div className="card image justify-content-around blur-card my-3">
                     <img className="card-img-top imageS" src={car7} alt="Card image cap" />
                     <div className="card-body d-flex justify-content-around">
-                        <Link to='/'>
+                            <Link to='/station'>
                             <div className="btn btn-dark mx-auto">View Service Startion</div>
                         </Link>
                     </div>
@@ -53,7 +53,7 @@ const ClientDashboard = () => {
                 <div className="card image justify-content-around blur-card my-3">
                     <img className="card-img-top imageS" src={car4} alt="Card image cap" />
                     <div className="card-body d-flex justify-content-around">
-                        <Link to='/'>
+                            <Link to='/admin/client'>
                             <div className="btn btn-dark mx-auto">View Client</div>
                         </Link>
                     </div>
