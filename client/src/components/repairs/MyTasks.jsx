@@ -1,13 +1,13 @@
 // MECHANIC
-// VIEW CLIENT REQUESTS FROM MECHANICS HOMEPAGE
+// MECHANIC'S ACCEPTED REQUESTS VIEW
 
 import React from 'react'
 import Axios from 'axios'
-import AcceptRequest from './AcceptRequest'
-import MyTasks from './MyTasks'
-import './repairs.css'
+import AddRequest from './AddRequest'
+import UpdateRequest from './UpdateRequest'
 
-const ViewRequests = () => {
+
+const AcceptedReqs = () => {
 
     const [data, setData] = React.useState([])
     const [upData, setUpData] = React.useState({});
@@ -19,23 +19,36 @@ const ViewRequests = () => {
     }
 
     React.useEffect(() => {
-        getData()
+        showData()
     }, [data])
 
-    const getData = () => {
+    const showData = () => {
         Axios.get('http://localhost:3001/repair/client/Binula')
             .then((res) => {
                 setData(res.data)
             })
-            .catch((err) => {
-                console.log("AN ERROR OCCURRED! \n" + err)
+            .catch((error) => {
+                console.log("AN ERROR OCCURRED! \n" + error)
             });
     }
 
-    const updateRow = (Record) => {
-        setUpData(Record)
+
+    const updateRow = (singleData) => {
+        setUpData(singleData)
         setUpdateToggler(1)
     }
+
+    const completeReq = (id) => {
+        Axios.delete('http://localhost:3001/repair/' + id)
+            .then((res) => {
+                console.log(res.data)
+                setData(data => data.filter((row) => row._id != id))
+            })
+            .catch((error) => {
+                console.log("AN ERROR OCCURRED! \n" + error)
+            })
+    }
+
 
     return (
         <div className='container w-100'>
@@ -43,13 +56,13 @@ const ViewRequests = () => {
             {toggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
-                    <AcceptRequest getData={getData} setToggler={setToggler} />
+                    <AddRequest showData={showData} setToggler={setToggler} />
                 </div>}
             {updateToggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
-                    <MyTasks
-                        getData={getData}
+                    <UpdateRequest
+                        showData={showData}
                         setUpdateToggler={setUpdateToggler}
                         upData={upData} />
                 </div>}
@@ -60,26 +73,34 @@ const ViewRequests = () => {
                         <thead class="table-light">
                             <tr>
                                 {/* CLIENT'S DATA */}
+                                <th scope="col">Client Name</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Mobile Number</th>
                                 <th scope="col">Model</th>
 
-                                {/* ACCEPT BUTTON */}
+                                {/* ACCEPTED MECHANIC'S DATA */}
+                                <th scope="col">Time</th>
+
+                                {/* EDIT BUTTON */}
+                                <th scope="col"></th>
+                                {/* COMPLETE/REMOVE BUTTON */}
                                 <th scope="col"></th>
                             </tr>
                         </thead>
 
                         <tbody>
                             {data.map((record) =>
-                                <tr key={record.client_name}>
+                                <tr key={record._id}>
+                                    <td>{record.client_name}</td>
                                     <td>{record.location}</td>
                                     <td>{record.client_mobile}</td>
                                     <td>{record.vehicle_model}</td>
-
+                                    <td>{record.acceptance.added_date}</td>
 
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
-                                        Accept</button></td>
-
+                                        Edit</button></td>
+                                    <td><button className="btn btn-danger" onClick={() => { completeReq(record.id) }}>
+                                        Complete</button></td>
                                 </tr>
 
                             )}
@@ -90,4 +111,4 @@ const ViewRequests = () => {
     )
 }
 
-export default ViewRequests
+export default AcceptedReqs;
