@@ -45,7 +45,22 @@ export const findByName = async (req, res) => {
 export const updateClient = async (req, res) => {
     try {
         const client = await Client.findOne({ _id: req.params.id });
-        Object.assign(client, req.body);
+        let vehicles = req.body.vehicles.split(",");
+		let vehiclesArray = vehicles.map((vehicle) => {
+			vehicle = vehicle.split(":");
+			let vehicleObject = {
+				vehicleNo: vehicle[0].trim(),
+				vehicleModel: vehicle[1].trim(),
+			};
+			return vehicleObject;
+        });
+        const updatedClient = {
+			name: req.body.name,
+			email: req.body.email,
+			mobileNo: req.body.mobileNo,
+			vehicles: vehiclesArray,
+		};
+        Object.assign(client, updatedClient);
 
         client
             .save()

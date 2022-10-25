@@ -4,15 +4,10 @@ import Station from "../models/station.js";
 export const addStation = (req, res) => {
     try {
         const newStation = new Station({
+         name: req.body.name,
+         mobile: req.body.mobile,
+         email: req.body.email,
 
-            name: req.body.name,
-            mobile: req.body.mobile,
-            email: req.body.email,
-            // address : {
-            //     number: req.body.Number,
-            //     street: req.body.Street,
-            //     town: req.body.Town
-            // }
         });
         newStation
             .save()

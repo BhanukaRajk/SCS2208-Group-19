@@ -3,6 +3,7 @@
 
 import react from "react"
 import Axios from "axios";
+import { Link } from 'react-router-dom'
 import "./repairs.css";
 
 const RepairReq = () => {
@@ -17,7 +18,7 @@ const RepairReq = () => {
 
     const addData = (event) => {
         event.preventDefault()
-        Axios.post('http://localhost:3001/repair', {
+        Axios.post('http://localhost:3001/repair/', {
             "Name": cname,
             "Location": vlocation,
             "MobileNo": mobile,
@@ -41,8 +42,11 @@ const RepairReq = () => {
     }
 
     return (
-        <div className="content">
-
+        <div className="">
+            <Link to="/client/dashboard">
+                <button className='btn btn-light m-4' type='button'>Dashboard</button>
+            </Link>
+            <div className="content blur-card p-5"> 
             <div>
                 <h3 className="header">Add Breakdown Repair Request</h3>
             </div><br/>
@@ -66,6 +70,7 @@ const RepairReq = () => {
             <button type="submit" className="sbtn" onClick={addData}>Submit</button><br/>
             <button type="button" className="cbtn" onClick={clearForm}>Clear</button>
 
+            </div>
         </div>
     )
 }

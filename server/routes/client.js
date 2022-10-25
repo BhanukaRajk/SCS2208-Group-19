@@ -14,7 +14,7 @@ router.get("/:name", findByName);
 
 router.post('/', addClient);
 
-router.patch("/:id", updateClient);
+router.patch("/id/:id", updateClient);
 
 router.delete('/:id', deleteClient);
 

@@ -32,7 +32,7 @@ const ClientDashboard = () => {
 
 	const deleteClient = (_id) => {
 		axios
-			.delete("http://localhost:3001/client" + _id)
+			.delete("http://localhost:3001/client/" + _id)
 			.then((response) => {
 				console.log(response.data);
 				setData((data) => data.filter((x) => x._id != _id));
@@ -125,10 +125,14 @@ const ClientDashboard = () => {
 										</button>
 									</td>
 									<td>
-										<DelButton
-											click={deleteClient}
-											id={x._id}
-										/>
+										<button
+											className="btn btn-danger"
+											onClick={() => {
+												deleteClient(x._id);
+											}}
+										>
+											Delete
+										</button>
 									</td>
 								</tr>
 							))}

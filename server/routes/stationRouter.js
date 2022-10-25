@@ -7,8 +7,8 @@ import {
     updateStation,
     deleteStation
 } from "../controllers/station.js";
-
 const router = express.Router();
+
 
 // ROUTES
 router.post('/', addStation);
@@ -19,6 +19,11 @@ router.patch('/:id', updateStation);
 router.delete('/:id', deleteStation);
 
 
+// router.get('/newstation', addStation);
+// router.get('/station/:id', findStationById);
+// router.post('/allstations', findAllStations);
+// router.patch('/id/:id', updateStation);
+// router.delete('/:id', deleteStation);
 
 
 

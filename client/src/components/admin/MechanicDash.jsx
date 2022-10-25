@@ -4,6 +4,7 @@ import axios from 'axios'
 import './mechanic.css'
 import MechanicAddForm from './MechanicAddForm'
 import MechanicUpdateForm from './MechanicUpdateForm'
+import { Link } from 'react-router-dom'
 
 const MechanicDash = () => {
 
@@ -12,7 +13,7 @@ const MechanicDash = () => {
     const [upData, setUpData] = useState({});
 
     // toggler
-    const [toggler, setToggler] = useState(0);
+    // const [toggler, setToggler] = useState(0);
     const [updateToggler, setUpdateToggler] = useState(0);
 
     // load data in reload
@@ -21,9 +22,9 @@ const MechanicDash = () => {
     }, [data])
 
 
-    const toggleForm = () => {
-        setToggler(toggler ? 0 : 1)
-    }
+    // const toggleForm = () => {
+    //     setToggler(toggler ? 0 : 1)
+    // }
 
     // Get all data from server
     const getData = () => {
@@ -59,11 +60,11 @@ const MechanicDash = () => {
     return (
         <div className='container w-100'>
             <br />
-            {toggler == 1 &&
+            {/* {toggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
                     <MechanicAddForm getData={getData} setToggler={setToggler} />
-                </div>}
+                </div>} */}
             {updateToggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
@@ -73,11 +74,16 @@ const MechanicDash = () => {
                         upData={upData} />
                 </div>}
 
-            {(!toggler && !updateToggler) ?
+            {(!updateToggler) ?
                 <div className='text-light'>
-                    <div className='d-flex justify-content-between px-5'>
-                        <h1>Mechanic data</h1>
-                        <button className='btn btn-success' onClick={toggleForm}>Add data</button>
+                    <h1 className='display-4 text-center'>Mechanic data</h1>
+                    <div className='d-flex justify-content-between align-items-center px-5'>
+                        <Link to="/admin/dashboard">
+                            <button className='btn btn-light m-2' type='button'>Dashboard</button>
+                        </Link>
+                        <Link to="/admin/mechanic/add">
+                            <button className='btn btn-success'>Add data</button>
+                        </Link>
                     </div>
                     <table className="table blur-card mt-5  rounded">
                         <thead>

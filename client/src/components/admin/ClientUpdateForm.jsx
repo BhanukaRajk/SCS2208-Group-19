@@ -3,15 +3,23 @@ import { useState } from "react";
 import axios from "axios";
 
 const ClientUpdateForm = ({ getData, setUpdateToggler, upData }) => {
+
+	let vehiclesObjectArray = upData.vehicles;
+	let vehiclesString = "";
+	vehiclesObjectArray.forEach((v) => {
+		vehiclesString += v.vehicleNo + ":" + v.vehicleModel + ",";
+	});
+	vehiclesString = vehiclesString.substring(0, vehiclesString.length - 1);
+
 	const [name, setName] = useState(upData.name);
 	const [email, setEmail] = useState(upData.email);
 	const [mobileNo, setMobileNo] = useState(upData.mobileNo);
-	const [vehicles, setVehicles] = useState(upData.vehicles);
+	const [vehicles, setVehicles] = useState(vehiclesString);
 
 	const updateData = (event) => {
 		event.preventDefault();
 		axios
-			.patch("http://localhost:3001/mechanic/id/" + upData._id, {
+			.patch("http://localhost:3001/client/id/" + upData._id, {
 				name: name,
 				email: email,
 				mobileNo: mobileNo,

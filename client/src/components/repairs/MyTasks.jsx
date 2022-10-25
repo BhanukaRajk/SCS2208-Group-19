@@ -5,9 +5,11 @@ import React from 'react'
 import Axios from 'axios'
 import AddRequest from './AddRequest'
 import UpdateRequest from './UpdateRequest'
-
+import { UserContext } from '../../UserContext'
+import { useContext } from 'react'
 
 const AcceptedReqs = () => {
+    const { user } = useContext(UserContext);
 
     const [data, setData] = React.useState([])
     const [upData, setUpData] = React.useState({});
@@ -23,7 +25,7 @@ const AcceptedReqs = () => {
     }, [data])
 
     const showData = () => {
-        Axios.get('http://localhost:3001/repair/client/Binula')
+        Axios.get('http://localhost:3001/repair/mechanic/'+user.email)
             .then((res) => {
                 setData(res.data)
             })
@@ -69,7 +71,7 @@ const AcceptedReqs = () => {
 
             {(!toggler && !updateToggler) ?
                 <div>
-                    <table className="table table-hover">
+                    <table className="table table-hover text-light blur-card">
                         <thead class="table-light">
                             <tr>
                                 {/* CLIENT'S DATA */}
