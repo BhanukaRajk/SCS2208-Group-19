@@ -57,11 +57,13 @@ const ServiceSchduleDash = () => {
     }
 
 
+
     return (
         <div>
             <div className='container w-100'>
                 <br />
 
+            
                 {toggler === 1 &&
                     <div>
                         <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
@@ -78,8 +80,8 @@ const ServiceSchduleDash = () => {
 
                 {(!toggler && !updateToggler) ?
                     <div>
-                        <button className='btn btn-primary' onClick={toggleForm}>Add Service</button><br/><br/><br/>
-                        <h2><b><u>Details of My Schedule</u></b></h2><br/>
+                        <button className='btn btn-primary' onClick={toggleForm}>Add Service</button><br /><br /><br />
+                        <h2><b><u>Details of My Schedule</u></b></h2><br />
                         <table className="table">
                             <thead>
                                 <tr>
