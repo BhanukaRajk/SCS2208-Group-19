@@ -4,6 +4,7 @@ import ClientDashboard from "./components/admin/ClientDashboard";
 import MechanicDash from './components/admin/MechanicDash';
 import MyTasks from "./components/repairs/MyTasks";
 import MyRequests from "./components/repairs/MyRequests";
+
 import AddRequest from "./components/repairs/AddRequest";
 import ServiceSchduleDash from "./components/serviceSchdule/ServiceSchduleDash";
 import HomePage from './components/Home/HomePage';
@@ -13,6 +14,9 @@ import Navbar from "./components/Home/Navbar";
 import MechanicDashboard from './components/dashboards/MechanicDashboard';
 import ClientDashboard from './components/dashboards/ClientDashboard';
 import AdminDashboard from './components/dashboards/AdminDashboard';
+
+import ClientServiceScduleAdd from "./components/serviceSchdule//ClientServiceScduleAdd";
+import ServiceStationSchduleView from "./components/serviceSchdule//ServiceStationSchduleView";
 
 function App() {
   return (
@@ -31,9 +35,12 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/" exact element={<HomePage />} />
+              <Route path="/ClientServiceScduleAdd" element={<ClientServiceScduleAdd />} />
+              <Route path="/ServiceStationSchduleView" element={<ServiceStationSchduleView />} />
           </Routes>
       </BrowserRouter>
   );
+
 }
 
 export default App;
