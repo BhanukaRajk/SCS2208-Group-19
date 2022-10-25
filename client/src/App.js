@@ -1,9 +1,10 @@
 import './App.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-
+import ClientDashboard from "./components/admin/ClientDashboard";
 import MechanicDash from './components/admin/MechanicDash';
 import MyTasks from "./components/repairs/MyTasks";
 import MyRequests from "./components/repairs/MyRequests";
+import AddRequest from "./components/repairs/AddRequest";
 import ServiceSchduleDash from "./components/serviceSchdule/ServiceSchduleDash";
 import HomePage from './components/Home/HomePage';
 import Login from './components/login/Login';
@@ -19,7 +20,9 @@ function App() {
           <Navbar />
           <Routes>
               <Route path="/admin/mechanic" element={<MechanicDash />} />
+              <Route path="/admin/client" element={<ClientDashboard />} />
               <Route path="/repairs/mytasks" element={<MyTasks />} />
+				      <Route path="/repairs/addrequest" element={<AddRequest />} />
               <Route path="/repairs/myrequests" element={<MyRequests />} />
               <Route path="/serviceSchdule" element={<ServiceSchduleDash />} />
               <Route path="/mechanic/dashboard" element={<MechanicDashboard />} />
