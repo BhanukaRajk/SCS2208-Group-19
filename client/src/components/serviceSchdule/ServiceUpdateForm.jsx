@@ -37,7 +37,7 @@ const ServiceUpdateForm = ({ getServiceSchdule, setUpdateToggler, upDataServiceS
     }
 
     const getName = () => {
-        axios.get('http://localhost:3001/mechanic')
+        axios.get('http://localhost:3001/station/')
             .then((response) => {
                 setBinulaData(response.data)
             })

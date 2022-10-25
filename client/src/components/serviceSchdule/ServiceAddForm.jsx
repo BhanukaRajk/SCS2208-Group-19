@@ -39,7 +39,7 @@ const ServiceAddForm = ({ getServiceSchdule, setToggler }) => {
     }
 
     const getName = () => {
-        axios.get('http://localhost:3001/client')
+        axios.get('http://localhost:3001/station/')
             .then((response) => {
                 setBinulaData(response.data)
             })
@@ -92,8 +92,7 @@ const ServiceAddForm = ({ getServiceSchdule, setToggler }) => {
                 </div>
 
 
-                <button type="submit" className="btn btn-primary" onClick={addServiceSchdule}>Submit</button>
-                <button type="button" className="btn btn-warning" onClick={clearForm}>clear</button>
+                <button type="submit" className="btn btn-primary" onClick={addServiceSchdule}>Add Service</button>
             </form>
         </div>
     );

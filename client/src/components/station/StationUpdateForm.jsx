@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 
-const StationUpdateForm = ({ getServiceSchdule, setUpdateToggler, upDataServiceSchdule }) => {
+const StationUpdateForm = ({ getServiceStation, setUpdateToggler, upDataServiceSchdule }) => {
     // states for form
     const [name, setStationname] = useState(upDataServiceSchdule.name);
     const [mobile, setStationmobileno] = useState(upDataServiceSchdule.mobile);
@@ -21,9 +21,10 @@ const StationUpdateForm = ({ getServiceSchdule, setUpdateToggler, upDataServiceS
             .then((response) => {
                 console.log(response.data)
                 clearForm()
-                getServiceSchdule()
+                getServiceStation()
                 setUpdateToggler(0)
             })
+            
             .catch((error) => {
                 console.log("Error " + error)
             });

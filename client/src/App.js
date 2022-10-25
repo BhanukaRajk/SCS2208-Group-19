@@ -14,8 +14,10 @@ import MechanicDashboard from './components/dashboards/MechanicDashboard';
 import ClientDashboard from './components/dashboards/ClientDashboard';
 import AdminDashboard from './components/dashboards/AdminDashboard';
 
-import ClientServiceScduleAdd from "./components/serviceSchdule//ClientServiceScduleAdd";
-import ServiceStationSchduleView from "./components/serviceSchdule//ServiceStationSchduleView";
+import ClientServiceScduleAdd from "./components/serviceSchdule/ClientServiceScduleAdd";
+import ServiceStationSchduleView from "./components/serviceSchdule/ServiceStationSchduleView";
+
+import ServiceStation from './components/station/ServiceStation'
 
 function App () {
     return (
@@ -35,6 +37,8 @@ function App () {
                 <Route path="/" exact element={<HomePage />} />
                 <Route path="/ClientServiceScduleAdd" element={<ClientServiceScduleAdd />} />
                 <Route path="/ServiceStationSchduleView" element={<ServiceStationSchduleView />} />
+
+                <Route path="/station" element={<ServiceStation />} />
             </Routes>
         </BrowserRouter>
     );
