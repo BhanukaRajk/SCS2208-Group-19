@@ -1,102 +1,116 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+// CLIENT
+// REQUESTS SENT BY ME
 
-const MyRequests = () => {
+import React from 'react'
+import Axios from 'axios'
+import AddRequest from './AddRequest'
+import UpdateRequest from './UpdateRequest'
+import './repairs.css'
 
-    const [data, setData] = useState([])
+const ReqByMe = () => {
 
-    // const [name, setName] = useState("")
-    // const [location, setLocation] = useState("")
-    // const [email, setEmail] = useState("")
-    // const [mobile, setMobile] = useState("")
-    // const [type, setType] = useState("")
+    const [data, setData] = React.useState([])
+    const [upData, setUpData] = React.useState({});
+    const [toggler, setToggler] = React.useState(0);
+    const [updateToggler, setUpdateToggler] = React.useState(0);
 
-    useEffect(() => {
+    const toggleForm = () => {
+        setToggler(toggler ? 0 : 1)
+    }
+
+    React.useEffect(() => {
         getData()
-    } , [])
+    }, [data])
 
     const getData = () => {
-        axios.get('http://localhost:3001/repair/client/Binula')/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            .then((response) => {
-                setData(response.data)
+        Axios.get('http://localhost:3001/repair/client/Binula')
+            .then((res) => {
+                setData(res.data)
             })
-            .catch((error) => {
-                console.log("Error " + error)
+            .catch((err) => {
+                console.log("AN ERROR OCCURRED! \n" + err)
             });
     }
 
-    
 
-    // const addData = (event) => {
-    //     event.preventDefault()
-    //     axios.post('http://localhost:3001/mechanic', {
-    //         "Name" : name,
-    //         "Location" : location,
-    //         "Email" : email,
-    //         "MobileNo" : mobile,
-    //         "Type" : type
-    //     })
-    //     .then((response) => {
-    //         console.log(response.data)
-    //         clearForm()
-    //         getData()
-    //     })
-    //     .catch((error) => {
-    //         console.log("Error " + error)
-    //     });
-        
-    // }
+    const removeRow = (id) => {
+        Axios.delete('http://localhost:3001/repair/' + id)
+            .then((res) => {
+                console.log(res.data)
+                setData(data => data.filter((item) => item._id != id))})
+            .catch((err) => {
+                console.log("AN ERROR OCCURRED! \n" + err)
+            })
+    }
 
-    // const clearForm = () => {
-    //     setName("")
-    //     setLocation("")
-    //     setEmail("")
-    //     setMobile("")
-    //     setType("")
-    // }
+    const updateRow = (Record) => {
+        setUpData(Record)
+        setUpdateToggler(1)
+    }
+
 
     return (
-        <div>
-            <table className="table table-hover">
-                <thead class="table-light">
-                    <tr>
-                        {/* CLIENT'S DATA */}
-                        <th scope="col">Location</th>
-                        <th scope="col">Mobile Number</th>
-                        <th scope="col">Model</th>
+        <div className='container w-100'>
+            <br />
+            {toggler == 1 &&
+                <div>
+                    <button className='btn btn-dark' onClick={toggleForm}>Add new request</button>
+                    <AddRequest getData={getData} setToggler={setToggler} />
+                </div>}
+            {updateToggler == 1 &&
+                <div>
+                    <button className='btn btn-dark' onClick={() => { setUpdateToggler(0) }}>Update request</button>
+                    <UpdateRequest
+                        getData={getData}
+                        setUpdateToggler={setUpdateToggler}
+                        upData={upData} />
+                </div>}
 
-                        {/* ACCEPTED MECHANIC'S DATA */}
-                        <th scope="col">Accepted by</th>
-                        <th scope="col">Mechanic mobile</th>
-                        <th scope="col">Date</th>
+            {(!toggler && !updateToggler) ?
+                <div>
+                    <table className="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                {/* CLIENT'S DATA */}
+                                <th scope="col">Location</th>
+                                <th scope="col">Mobile Number</th>
+                                <th scope="col">Model</th>
 
-                        {/* EDIT BUTTON */}
-                        <th scope="col">Edit</th>
-                        {/* REMOVE BUTTON */}
-                        <th scope="col">Remove</th>
-                    </tr>
-                </thead>
+                                {/* ACCEPTED MECHANIC'S DATA */}
+                                <th scope="col">Accepted by</th>
+                                <th scope="col">Mechanic mobile</th>
+                                <th scope="col">Date</th>
 
-                <tbody>
-                    {data.map((record) =>
-                        <tr key={record.client_name}>
-                            <td>{record.location}</td>
-                            <td>{record.client_mobile}</td>
-                            <td>{record.vehicle_model}</td>
+                                {/* EDIT BUTTON */}
+                                <th scope="col"></th>
+                                {/* REMOVE BUTTON */}
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
 
-                            <td>{record.acceptance.acceptedby}</td>
-                            <td>{record.acceptance.mechanic_mobile}</td>
-                            <td>{record.acceptance.added_date}</td>
-                                                        
-                            <td><button className="btn btn-warning">Edit</button></td>
-                            <td><button className="btn btn-danger">Remove</button></td>
-                        </tr>
+                        <tbody>
+                            {data.map((record) =>
+                                <tr key={record.client_name}>
+                                    <td>{record.location}</td>
+                                    <td>{record.client_mobile}</td>
+                                    <td>{record.vehicle_model}</td>
 
-                    )}
-                </tbody>
-            </table>
+                                    <td>{record.acceptance.acceptedby}</td>
+                                    <td>{record.acceptance.mechanic_mobile}</td>
+                                    <td>{record.acceptance.added_date}</td>
+
+                                    <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
+                                        Edit</button></td>
+                                    <td><button className="btn btn-danger" onClick={() => { removeRow(record._id) }}>
+                                        Remove</button></td>
+                                </tr>
+
+                            )}
+                        </tbody>
+                    </table>
+                </div> : <div></div>}
         </div>
     )
 }
 
-export default MyRequests
+export default ReqByMe;

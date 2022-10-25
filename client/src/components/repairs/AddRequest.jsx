@@ -1,8 +1,11 @@
-import react from "react"
-import axios from "axios";
-import "./AddRequest.css";
+// CLIENT
+// ADD REQUESTS
 
-const repairReq = () => {
+import react from "react"
+import Axios from "axios";
+import "./repairs.css";
+
+const RepairReq = () => {
 
 
     const [cname, setName] = react.useState("")
@@ -14,7 +17,7 @@ const repairReq = () => {
 
     const addData = (event) => {
         event.preventDefault()
-        axios.post('http://localhost:3001/repair', {
+        Axios.post('http://localhost:3001/repair', {
             "Name": cname,
             "Location": vlocation,
             "MobileNo": mobile,
@@ -41,7 +44,7 @@ const repairReq = () => {
         <div className="content">
 
             <div>
-                <h3 className="header">Add Emergency Repair Request</h3>
+                <h3 className="header">Add Breakdown Repair Request</h3>
             </div><br/>
             <div className="mb-2">
                 <label className="form-label">Client Name</label><br/>
@@ -57,7 +60,7 @@ const repairReq = () => {
             </div>
             <div className="mb-2">
                 <label className="form-label">Vehicle model</label><br/>
-                <input type="text" className="form-control" placeholder="Ex: Honda vezal" onChange={(dynamic) => { setModel(dynamic.target.value) }} value={model} />
+                <input type="text" className="form-control" placeholder="Ex: Honda CH-R" onChange={(dynamic) => { setModel(dynamic.target.value) }} value={model} />
             </div><br/>
 
             <button type="submit" className="sbtn" onClick={addData}>Submit</button><br/>
@@ -67,4 +70,4 @@ const repairReq = () => {
     )
 }
 
-export default repairReq;
+export default RepairReq;
