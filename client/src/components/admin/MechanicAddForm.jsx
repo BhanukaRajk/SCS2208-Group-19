@@ -43,7 +43,7 @@ const MechanicAddForm = ({ getData, setToggler }) => {
     }
     return (
         <div>
-            <form className='container w-75'>
+            <form className='container w-75 text-light blur-card p-5'>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />

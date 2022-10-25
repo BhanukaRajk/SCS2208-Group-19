@@ -74,14 +74,14 @@ const MechanicDash = () => {
                 </div>}
 
             {(!toggler && !updateToggler) ?
-                <div>
+                <div className='text-light'>
                     <div className='d-flex justify-content-between px-5'>
                         <h1>Mechanic data</h1>
                         <button className='btn btn-success' onClick={toggleForm}>Add data</button>
                     </div>
-                    <table className="table">
+                    <table className="table blur-card mt-5  rounded">
                         <thead>
-                            <tr>
+                            <tr className='text-light p-3'>
                                 <th scope="col">name</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Email</th>
@@ -91,7 +91,7 @@ const MechanicDash = () => {
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='text-light'>
                             {data.map((x) =>
                                 <tr key={x._id}>
                                     <th >{x.name}</th>
@@ -109,7 +109,6 @@ const MechanicDash = () => {
                                     </td>
                                 </tr>
                             )}
-
                         </tbody>
                     </table>
                 </div> : <div></div>}

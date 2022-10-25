@@ -21,7 +21,7 @@ const Register = () => {
                 .then((response) => {
                     axios.get('http://localhost:3001/auth/get/' + username)
                         .then((res) => {
-                            setType(res.data.type)
+                            // setType(res.data.type)
                             setMessage(`login successfull - ${res.data.type}`)
                         })
                         .catch(err => {
