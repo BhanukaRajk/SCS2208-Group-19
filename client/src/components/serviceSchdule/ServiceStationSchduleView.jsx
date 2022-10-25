@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './serviceSchdule.css'
 import ServiceAddForm from './ServiceAddForm';
 import ServiceUpdateForm from './ServiceUpdateForm';
 
@@ -16,8 +15,6 @@ const ServiceSchduleDash = () => {
 
     useEffect(() => {
         getServiceSchdule()
-        // getName()
-
     }, [data]);
 
     const toggleForm = () => {
@@ -57,9 +54,35 @@ const ServiceSchduleDash = () => {
     }
 
 
+    // const handleTextSearch = (e) => {
+    //     const searchTerm = e.target.value;
+
+    //     axios.get('http://localhost:3001/serviceSchedule')
+    //         .then((response) => {
+    //             if (searchTerm == "") {
+    //                 setServiceSchduleData(response.data)
+    //             }
+    //             else {
+    //                 const result = response.data.filter((data) => {
+    //                     return data.serviceName.toLowerCase().includes(searchTerm.toLowerCase())
+    //                 })
+    //                 setServiceSchduleData(result)
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log("Error " + error)
+    //         });
+    // }
+
+
     return (
         <div>
+            {/* <div className='col-lg-9 mt-2 mb-2'>
+                <input type="search" className="form-control"  placeholder='Search' name='searchTerm' onChange={handleTextSearch} />
+            </div> */}
+
             <div className='container w-100'>
+
                 <br />
 
                 {toggler === 1 &&

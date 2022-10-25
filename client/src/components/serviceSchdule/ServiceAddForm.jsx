@@ -39,7 +39,7 @@ const ServiceAddForm = ({ getServiceSchdule, setToggler }) => {
     }
 
     const getName = () => {
-        axios.get('http://localhost:3001/mechanic')
+        axios.get('http://localhost:3001/client')
             .then((response) => {
                 setBinulaData(response.data)
             })
@@ -60,6 +60,7 @@ const ServiceAddForm = ({ getServiceSchdule, setToggler }) => {
 
     return (
         <div>
+            
             <form className='container w-75'>
                 <div className="mb-3">
                     <label className="form-label" >Client Name</label>
