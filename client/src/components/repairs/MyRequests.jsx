@@ -32,6 +32,7 @@ const ReqByMe = () => {
             });
     }
 
+
     const removeRow = (id) => {
         Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
@@ -46,6 +47,7 @@ const ReqByMe = () => {
         setUpData(Record)
         setUpdateToggler(1)
     }
+
 
     return (
         <div className='container w-100'>
