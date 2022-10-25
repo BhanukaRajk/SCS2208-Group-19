@@ -86,8 +86,7 @@ const ServiceUpdateForm = ({ getServiceSchdule, setUpdateToggler, upDataServiceS
                     <input type="text" className="form-control" onChange={(e) => { setServicetime(e.target.value) }} value={servicetime} />
                 </div>
 
-                <button type="submit" className="btn btn-primary" onClick={updateServiceSchdule}>Submit</button>
-                <button type="button" className="btn btn-warning" onClick={clearForm}>clear</button>
+                <button type="submit" className="btn btn-primary" onClick={updateServiceSchdule}>Update</button>
             </form>
         </div>
     );
