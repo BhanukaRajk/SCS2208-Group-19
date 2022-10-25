@@ -59,26 +59,29 @@ const MechanicDash = () => {
     return (
         <div className='container w-100'>
             <br />
-            {toggler==1 && 
-            <div>
-                <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
-                    <MechanicAddForm getData={getData} setToggler={setToggler}/>
-            </div>}
-            {updateToggler==1 &&
+            {toggler == 1 &&
                 <div>
-                    <button className='btn btn-primary' onClick={()=>{setUpdateToggler(0)}}>Show data</button>
-                    <MechanicUpdateForm 
-                            getData={getData} 
-                            setUpdateToggler={setUpdateToggler}
-                            upData={upData} />
+                    <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
+                    <MechanicAddForm getData={getData} setToggler={setToggler} />
+                </div>}
+            {updateToggler == 1 &&
+                <div>
+                    <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
+                    <MechanicUpdateForm
+                        getData={getData}
+                        setUpdateToggler={setUpdateToggler}
+                        upData={upData} />
                 </div>}
 
             {(!toggler && !updateToggler) ?
-                <div>
-                    <button className='btn btn-primary' onClick={toggleForm}>Add data</button>
-                    <table className="table">
+                <div className='text-light'>
+                    <div className='d-flex justify-content-between px-5'>
+                        <h1>Mechanic data</h1>
+                        <button className='btn btn-success' onClick={toggleForm}>Add data</button>
+                    </div>
+                    <table className="table blur-card mt-5  rounded">
                         <thead>
-                            <tr>
+                            <tr className='text-light p-3'>
                                 <th scope="col">name</th>
                                 <th scope="col">Location</th>
                                 <th scope="col">Email</th>
@@ -88,7 +91,7 @@ const MechanicDash = () => {
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className='text-light'>
                             {data.map((x) =>
                                 <tr key={x._id}>
                                     <th >{x.name}</th>
@@ -106,10 +109,9 @@ const MechanicDash = () => {
                                     </td>
                                 </tr>
                             )}
-
                         </tbody>
                     </table>
-                </div>:<div></div>}
+                </div> : <div></div>}
         </div>
     )
 }

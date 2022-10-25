@@ -43,7 +43,7 @@ const MechanicUpdateForm = ({ getData, setUpdateToggler, upData }) => {
     }
     return (
         <div>
-            <form className='container w-75'>
+            <form className='container w-75 text-light blur-card p-5'>
                 <div className="mb-3">
                     <label className="form-label">Name</label>
                     <input type="text" className="form-control" onChange={(e) => { setName(e.target.value) }} value={name} />
@@ -64,9 +64,10 @@ const MechanicUpdateForm = ({ getData, setUpdateToggler, upData }) => {
                     <label className="form-label">Type</label>
                     <input type="text" className="form-control" onChange={(e) => { setType(e.target.value) }} value={type} />
                 </div>
-
-                <button type="submit" className="btn btn-primary" onClick={updateData}>Update</button>
-                <button type="button" className="btn btn-warning" onClick={clearForm}>Clear</button>
+                <div className='d-flex'>
+                    <button type="submit" className="btn btn-success m-2" onClick={updateData}>Update</button>
+                    <button type="button" className="btn btn-warning m-2" onClick={clearForm}>Clear</button>
+                </div>
             </form>
             <br /><br />
         </div>
