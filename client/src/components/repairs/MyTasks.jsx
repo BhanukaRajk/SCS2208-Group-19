@@ -36,14 +36,13 @@ const AcceptedReqs = () => {
     const updateRow = (singleData) => {
         setUpData(singleData)
         setUpdateToggler(1)
-        // console.log(upData)
     }
 
     const completeReq = (id) => {
         Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
                 console.log(res.data)
-                setData(data => data.filter((row) => row._id !== id))
+                setData(data => data.filter((row) => row._id != id))
             })
             .catch((error) => {
                 console.log("AN ERROR OCCURRED! \n" + error)
@@ -54,12 +53,12 @@ const AcceptedReqs = () => {
     return (
         <div className='container w-100'>
             <br />
-            {toggler === 1 &&
+            {toggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
                     <AddRequest showData={showData} setToggler={setToggler} />
                 </div>}
-            {updateToggler === 1 &&
+            {updateToggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
                     <UpdateRequest

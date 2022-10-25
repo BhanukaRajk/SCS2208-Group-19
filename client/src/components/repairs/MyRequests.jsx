@@ -32,11 +32,11 @@ const ReqByMe = () => {
             });
     }
 
-    const acceptRow = (id) => {
+    const removeRow = (id) => {
         Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
                 console.log(res.data)
-                setData(data => data.filter((item) => item._id !== id))})
+                setData(data => data.filter((item) => item._id != id))})
             .catch((err) => {
                 console.log("AN ERROR OCCURRED! \n" + err)
             })
@@ -50,14 +50,14 @@ const ReqByMe = () => {
     return (
         <div className='container w-100'>
             <br />
-            {toggler === 1 &&
+            {toggler == 1 &&
                 <div>
-                    <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
+                    <button className='btn btn-dark' onClick={toggleForm}>Add new request</button>
                     <AddRequest getData={getData} setToggler={setToggler} />
                 </div>}
-            {updateToggler === 1 &&
+            {updateToggler == 1 &&
                 <div>
-                    <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
+                    <button className='btn btn-dark' onClick={() => { setUpdateToggler(0) }}>Update request</button>
                     <UpdateRequest
                         getData={getData}
                         setUpdateToggler={setUpdateToggler}
@@ -80,9 +80,9 @@ const ReqByMe = () => {
                                 <th scope="col">Date</th>
 
                                 {/* EDIT BUTTON */}
-                                <th scope="col">Edit</th>
+                                <th scope="col"></th>
                                 {/* REMOVE BUTTON */}
-                                <th scope="col">Remove</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -99,8 +99,8 @@ const ReqByMe = () => {
 
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
                                         Edit</button></td>
-                                    <td><button className="btn btn-dark" onClick={() => { acceptRow(record) }}>
-                                        Accept</button></td>
+                                    <td><button className="btn btn-danger" onClick={() => { removeRow(record._id) }}>
+                                        Remove</button></td>
                                 </tr>
 
                             )}

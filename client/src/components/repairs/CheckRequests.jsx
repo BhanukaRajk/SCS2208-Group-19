@@ -32,16 +32,6 @@ const ViewRequests = () => {
             });
     }
 
-    const acceptRow = (id) => {
-        Axios.delete('http://localhost:3001/repair/' + id)
-            .then((res) => {
-                console.log(res.data)
-                setData(data => data.filter((item) => item._id !== id))})
-            .catch((err) => {
-                console.log("AN ERROR OCCURRED! \n" + err)
-            })
-    }
-
     const updateRow = (Record) => {
         setUpData(Record)
         setUpdateToggler(1)
@@ -50,12 +40,12 @@ const ViewRequests = () => {
     return (
         <div className='container w-100'>
             <br />
-            {toggler === 1 &&
+            {toggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
                     <AcceptRequest getData={getData} setToggler={setToggler} />
                 </div>}
-            {updateToggler === 1 &&
+            {updateToggler == 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
                     <MyTasks
@@ -74,15 +64,8 @@ const ViewRequests = () => {
                                 <th scope="col">Mobile Number</th>
                                 <th scope="col">Model</th>
 
-                                {/* ACCEPTED MECHANIC'S DATA */}
-                                <th scope="col">Accepted by</th>
-                                <th scope="col">Mechanic mobile</th>
-                                <th scope="col">Date</th>
-
-                                {/* EDIT BUTTON */}
-                                <th scope="col">Edit</th>
-                                {/* REMOVE BUTTON */}
-                                <th scope="col">Remove</th>
+                                {/* ACCEPT BUTTON */}
+                                <th scope="col"></th>
                             </tr>
                         </thead>
 
@@ -93,14 +76,10 @@ const ViewRequests = () => {
                                     <td>{record.client_mobile}</td>
                                     <td>{record.vehicle_model}</td>
 
-                                    <td>{record.acceptance.acceptedby}</td>
-                                    <td>{record.acceptance.mechanic_mobile}</td>
-                                    <td>{record.acceptance.added_date}</td>
 
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
-                                        Edit</button></td>
-                                    <td><button className="btn btn-dark" onClick={() => { acceptRow(record) }}>
                                         Accept</button></td>
+
                                 </tr>
 
                             )}
