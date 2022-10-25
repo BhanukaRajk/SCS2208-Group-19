@@ -30,9 +30,11 @@ const Login = () => {
               setMessage(`login successfull - ${user.type}`)
             })
             .catch(err => {
+              setMessage(`login Failed`)
               console.log(err.message);
             })
         }).catch((err) => {
+          setMessage(`login Failed`)
           console.log(err.message);
         })
     else {

@@ -24,8 +24,8 @@ function App() {
 
     return (
         <BrowserRouter>
-                <Navbar />
                 <UserContext.Provider value={{user,setUser}}>
+                <Navbar />
                 <Routes>
                     <Route path="/admin/mechanic" element={user.type=='admin'?<MechanicDash />:<Login />} />
                     <Route path="/admin/mechanic/add"element={user.type=='admin'?<MechanicAddForm />:<Login />}/>

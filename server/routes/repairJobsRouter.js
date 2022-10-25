@@ -11,7 +11,7 @@ import {
 
 const router = express.Router();
 
-router.get('/client/:client', findByClient);
+router.get('/client/:email', findByClient);
 router.get('/mechanic/:mechanic', findByMechanic);
 router.post('/', addRequest);
 router.patch('/location/:location', acceptRequest);

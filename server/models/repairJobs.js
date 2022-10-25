@@ -9,7 +9,10 @@ const repairSchema = mongoose.Schema({
         type : String,
         require : true
     },
-
+    client_email : {
+        type : String,
+        require : true
+    },
     // VEHICLE'S CURRENT LOCATION
     location : {
         // DATA TYPE IS STRING AND CANNOT BE NULL

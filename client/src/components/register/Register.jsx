@@ -17,6 +17,7 @@ const Register = () => {
             axios.post('http://localhost:3001/auth/register', {
                 "username": username,
                 "password": password,
+                "type":"client"
             })
                 .then((response) => {
                     axios.get('http://localhost:3001/auth/get/' + username)

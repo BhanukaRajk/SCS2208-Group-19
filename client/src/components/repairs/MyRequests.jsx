@@ -7,8 +7,11 @@ import Axios from 'axios'
 import UpdateRequest from './UpdateRequest'
 import './repairs.css'
 import { Link } from 'react-router-dom'
+import { UserContext } from '../../UserContext'
+import { useContext } from 'react'
 
 const ReqByMe = () => {
+    const { user } = useContext(UserContext);
 
     const [data, setData] = React.useState([])
     const [upData, setUpData] = React.useState({});
@@ -24,7 +27,7 @@ const ReqByMe = () => {
     }, [data])
 
     const getData = () => {
-        Axios.get('http://localhost:3001/repair/client/Sugatha')
+        Axios.get('http://localhost:3001/repair/client/'+user.email)
             .then((res) => {
                 setData(res.data)
             })

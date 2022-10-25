@@ -1,8 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import icon from './assets/icon.ico'
+import { UserContext } from '../../UserContext'
+import { useContext } from 'react'
 
 const Navbar = () => {
+    const { user, setUser } = useContext(UserContext);
+
+    const logout = () =>{
+        setUser({email:"",type:""})
+    }
     return (
         <div className='navbar-container'>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,6 +31,9 @@ const Navbar = () => {
                             </li>
                             <li className="nav-item px-3">
                                 <Link to='/register'><div className="nav-link" >Register</div></Link>
+                            </li>
+                            <li>
+                                <button className='btn btn-dark' onClick={logout}>Logout</button>
                             </li>
                         </ul>
                     </div>

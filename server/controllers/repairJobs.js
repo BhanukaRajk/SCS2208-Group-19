@@ -3,7 +3,7 @@ import repair from "../models/repairJobs.js";
 // READ CLIENT REQUESTS FROM CLIENT DASHBOARD
 export const findByClient = async (req, res) => {
     try {
-        const clientView = await repair.find({ "client_name": req.params.client });
+        const clientView = await repair.find({ "client_email": req.params.email });
         res.status(200).send(clientView);
     } catch (error) {
         res.status(400).send(`ERROR! Couldn't get data - \nerror: ${error}`);
@@ -13,7 +13,7 @@ export const findByClient = async (req, res) => {
 // READ CLIENT REQUESTS FROM MECHANICS DASHBOARD
 export const findByMechanic = async (req, res) => {
     try {
-        const mechanicView = await repair.find({ "_id": req.params.mechanic });
+        const mechanicView = await repair.find({"client_email":req.params.mechanic});
         res.status(200).send(mechanicView);
     } catch (error) {
         res.status(400).send(`ERROR! Couldn't get data - \nerror: ${error}`);
