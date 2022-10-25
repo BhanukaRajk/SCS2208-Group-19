@@ -20,7 +20,7 @@ const ClientDashboard = () => {
 				setData(response.data);
 			})
 			.catch((error) => {
-				consoloe.log(`Error: ${error}`);
+				console.log(`Error: ${error}`);
 			});
     };
     
@@ -34,12 +34,12 @@ const ClientDashboard = () => {
 				vehicles: vehicles
 			})
 			.then((response) => {
-                consoloe.log(response);
+                console.log(response);
                 clearForm();
                 getData();
 			})
 			.catch((error) => {
-				consoloe.log(`Error: ${error}`);
+				console.log(`Error: ${error}`);
             });
     }
 
