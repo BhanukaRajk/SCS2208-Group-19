@@ -2,12 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const ClientDashboard = () => {
-    const [data, setData] = useState([]);
-    
-    const [name, setName] = useState([]);
-    const [email, setEmail] = useState([]);
-    const [mobileNo, setMobileNo] = useState([]);
-    const [vehicles, setVehicles] = useState([]);
+	const [data, setData] = useState([]);
+
+	const [name, setName] = useState([]);
+	const [email, setEmail] = useState([]);
+	const [mobileNo, setMobileNo] = useState([]);
+	const [vehicles, setVehicles] = useState([]);
+
+    useEffect(() => {
+		getData();
+	}, []);
 
 	const getData = () => {
 		axios
@@ -18,11 +22,33 @@ const ClientDashboard = () => {
 			.catch((error) => {
 				consoloe.log(`Error: ${error}`);
 			});
-	};
+    };
+    
+    const addData = (event) => {
+        event.preventDefault();
+        axios
+			.post("http://localhost:3001/client/", {
+				name: name,
+                email: email,
+                mobileNo: mobileNo,
+				vehicles: vehicles
+			})
+			.then((response) => {
+                consoloe.log(response);
+                clearForm();
+                getData();
+			})
+			.catch((error) => {
+				consoloe.log(`Error: ${error}`);
+            });
+    }
 
-	useEffect(() => {
-		getData();
-	}, []);
+    const clearForm = () => {
+        setName('');
+        setEmail('');
+        setMobileNo('');
+        setVehicles('');
+    }
 
 	return (
 		<div className="container w-50">
@@ -71,7 +97,7 @@ const ClientDashboard = () => {
 						value={vehicles}
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary">
+				<button type="submit" className="btn btn-primary" onClick={addData}>
 					Submit
 				</button>
 			</form>
