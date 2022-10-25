@@ -78,8 +78,8 @@ const ServiceSchduleDash = () => {
 
                 {(!toggler && !updateToggler) ?
                     <div>
-                        <button className='btn btn-primary' onClick={toggleForm}>Add data</button>
-                        <table className="table">
+                        <h2><b><u>Pending Client Request</u></b></h2><br />
+                        <table className="table text-light blur-card" >
                             <thead>
                                 <tr>
                                     <th scope="col">Client Name</th>

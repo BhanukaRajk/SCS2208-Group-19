@@ -82,7 +82,7 @@ const ServiceSchduleDash = () => {
                     <div>
                         <button className='btn btn-primary' onClick={toggleForm}>Add Service</button><br /><br /><br />
                         <h2><b><u>Details of My Schedule</u></b></h2><br />
-                        <table className="table">
+                        <table className="table text-light blur-card">
                             <thead>
                                 <tr>
                                     <th scope="col">Client Name</th>
