@@ -1,6 +1,6 @@
 body {
     font-family: sans-serif;
-    color: rgb(36, 36, 36);
+    color: rgb(255, 255, 255);
 }
 
 .header {
@@ -12,10 +12,8 @@ body {
     margin: auto;
     padding: 2% 5%;
     margin-top: 2rem;
-    box-shadow: 1px 3px 8px 12px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    box-shadow: 10px black;
 }
 
 .sbtn {
@@ -42,4 +40,12 @@ body {
 
 .sbtn:hover {
     background: #55f45da9;
+}
+
+.card {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }

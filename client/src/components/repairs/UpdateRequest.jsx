@@ -1,13 +1,16 @@
-import React from "react"
+// CLIENT
+// UPDATE MY REQUESTS
+
+import react from "react"
 import Axios from "axios";
 import "./repairs.css";
 
-const UpdateClientRequest = ({ showData, setUpdateToggler, thisOne }) => {
+const clientUpdateReqs = ({ showData, setUpdateToggler, thisOne }) => {
 
-    const [cname, setClientName] = React.useState(thisOne.cname)
-    const [vlocation, setVehicleLocation] = React.useState(thisOne.vlocation)
-    const [mobile, setClientMobileNo] = React.useState(thisOne.mobile)
-    const [model, setVehicleModel] = React.useState(thisOne.model)
+    const [cname, setClientName] = react.useState(thisOne.cname)
+    const [vlocation, setVehicleLocation] = react.useState(thisOne.vlocation)
+    const [mobile, setClientMobileNo] = react.useState(thisOne.mobile)
+    const [model, setVehicleModel] = react.useState(thisOne.model)
 
 
     const updateReqData = (event) => {
@@ -66,4 +69,4 @@ const UpdateClientRequest = ({ showData, setUpdateToggler, thisOne }) => {
     )
 }
 
-export default UpdateClientRequest;
+export default clientUpdateReqs;

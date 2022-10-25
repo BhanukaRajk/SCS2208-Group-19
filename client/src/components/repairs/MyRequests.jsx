@@ -1,9 +1,13 @@
+// CLIENT
+// REQUESTS SENT BY ME
+
 import React from 'react'
 import Axios from 'axios'
 import AddRequest from './AddRequest'
 import UpdateRequest from './UpdateRequest'
+import './repairs.css'
 
-const MyRequests = () => {
+const ReqByMe = () => {
 
     const [data, setData] = React.useState([])
     const [upData, setUpData] = React.useState({});
@@ -15,37 +19,33 @@ const MyRequests = () => {
     }
 
     React.useEffect(() => {
-        showData()
+        getData()
     }, [data])
 
-    const showData = () => {
+    const getData = () => {
         Axios.get('http://localhost:3001/repair/client/Binula')
             .then((res) => {
                 setData(res.data)
             })
             .catch((err) => {
-                console.log("ERROR:" + err)
+                console.log("AN ERROR OCCURRED! \n" + err)
             });
     }
 
-    const updateRow = (ThisRecord) => {
-        setUpData(ThisRecord)
-        console.log(ThisRecord)
-        setUpdateToggler(1)
-    }
-
-
-    const deleteRow = (id) => {
+    const acceptRow = (id) => {
         Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
                 console.log(res.data)
-                setData(data => data.filter((item) => item._id !== id))
-            })
+                setData(data => data.filter((item) => item._id !== id))})
             .catch((err) => {
-                console.log("ERROR:" + err)
+                console.log("AN ERROR OCCURRED! \n" + err)
             })
     }
 
+    const updateRow = (Record) => {
+        setUpData(Record)
+        setUpdateToggler(1)
+    }
 
     return (
         <div className='container w-100'>
@@ -53,15 +53,15 @@ const MyRequests = () => {
             {toggler === 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
-                    <AddRequest showData={showData} setToggler={setToggler} />
+                    <AddRequest getData={getData} setToggler={setToggler} />
                 </div>}
             {updateToggler === 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
                     <UpdateRequest
-                        showData={showData}
+                        getData={getData}
                         setUpdateToggler={setUpdateToggler}
-                        upData = {upData} />
+                        upData={upData} />
                 </div>}
 
             {(!toggler && !updateToggler) ?
@@ -80,9 +80,9 @@ const MyRequests = () => {
                                 <th scope="col">Date</th>
 
                                 {/* EDIT BUTTON */}
-                                <th scope="col"></th>
+                                <th scope="col">Edit</th>
                                 {/* REMOVE BUTTON */}
-                                <th scope="col"></th>
+                                <th scope="col">Remove</th>
                             </tr>
                         </thead>
 
@@ -99,9 +99,8 @@ const MyRequests = () => {
 
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
                                         Edit</button></td>
-                                    <td><button className="btn btn-danger" onClick={() => { deleteRow(record.id) }}>
-                                        Remove</button></td>
-
+                                    <td><button className="btn btn-dark" onClick={() => { acceptRow(record) }}>
+                                        Accept</button></td>
                                 </tr>
 
                             )}
@@ -112,4 +111,4 @@ const MyRequests = () => {
     )
 }
 
-export default MyRequests
+export default ReqByMe;

@@ -1,3 +1,6 @@
+// MECHANIC
+// MECHANIC'S ACCEPTED REQUESTS VIEW
+
 import React from 'react'
 import Axios from 'axios'
 import AddRequest from './AddRequest'
@@ -109,4 +112,4 @@ const AcceptedReqs = () => {
     )
 }
 
-export default AcceptedReqs
+export default AcceptedReqs;

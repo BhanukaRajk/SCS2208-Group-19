@@ -1,10 +1,13 @@
+// MECHANIC
+// VIEW CLIENT REQUESTS FROM MECHANICS HOMEPAGE
+
 import React from 'react'
 import Axios from 'axios'
-import AddRequest from './AddRequest'
-import UpdateRequest from './UpdateRequest'
-import './mechanic.css'
+import AcceptRequest from './AcceptRequest'
+import MyTasks from './MyTasks'
+import './repairs.css'
 
-const MyRequests = () => {
+const ViewRequests = () => {
 
     const [data, setData] = React.useState([])
     const [upData, setUpData] = React.useState({});
@@ -29,7 +32,7 @@ const MyRequests = () => {
             });
     }
 
-    const deleteRow = (id) => {
+    const acceptRow = (id) => {
         Axios.delete('http://localhost:3001/repair/' + id)
             .then((res) => {
                 console.log(res.data)
@@ -39,8 +42,8 @@ const MyRequests = () => {
             })
     }
 
-    const updateRow = (singleData) => {
-        setUpData(singleData)
+    const updateRow = (Record) => {
+        setUpData(Record)
         setUpdateToggler(1)
     }
 
@@ -50,12 +53,12 @@ const MyRequests = () => {
             {toggler === 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
-                    <AddRequest getData={getData} setToggler={setToggler} />
+                    <AcceptRequest getData={getData} setToggler={setToggler} />
                 </div>}
             {updateToggler === 1 &&
                 <div>
                     <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
-                    <UpdateRequest
+                    <MyTasks
                         getData={getData}
                         setUpdateToggler={setUpdateToggler}
                         upData={upData} />
@@ -96,8 +99,8 @@ const MyRequests = () => {
 
                                     <td><button className="btn btn-primary" onClick={() => { updateRow(record) }}>
                                         Edit</button></td>
-                                    <td><button className="btn btn-danger" onClick={() => { deleteRow(record.id) }}>
-                                        Remove</button></td>
+                                    <td><button className="btn btn-dark" onClick={() => { acceptRow(record) }}>
+                                        Accept</button></td>
                                 </tr>
 
                             )}
@@ -108,4 +111,4 @@ const MyRequests = () => {
     )
 }
 
-export default MyRequests
+export default ViewRequests
