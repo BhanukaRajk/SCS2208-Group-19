@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import ServiceAddForm from './ServiceAddForm';
-import ServiceUpdateForm from './ServiceUpdateForm';
+import StationAddForm from './StationAddForm';
+import StationUpdateForm from './StationUpdateForm';
 
-const ServiceSchduleDash = () => {
 
-    const [data, setServiceSchduleData] = useState([]);
-    const [upDataServiceSchdule, setUpDataServiceSchdule] = useState({});
+import React from 'react';
+
+
+const ServiceStation = () => {
+
+    const [data, setStation] = useState([]);
+    const [updateStation, setUpDataStation] = useState({});
 
     // toggler
     const [toggler, setToggler] = useState(0);
@@ -14,7 +18,8 @@ const ServiceSchduleDash = () => {
 
 
     useEffect(() => {
-        getServiceSchdule()
+        getServiceStation()
+
     }, [data]);
 
     const toggleForm = () => {
@@ -23,10 +28,10 @@ const ServiceSchduleDash = () => {
 
 
 
-    const getServiceSchdule = () => {
-        axios.get('http://localhost:3001/serviceSchedule')
+    const getServiceStation = () => {
+        axios.get('http://localhost:3001/station')
             .then((response) => {
-                setServiceSchduleData(response.data)
+                setStation(response.data)
             })
             .catch((error) => {
                 console.log("Error " + error)
@@ -34,11 +39,11 @@ const ServiceSchduleDash = () => {
     }
 
 
-    const deleteServiceSchdule = (id) => {
-        axios.delete('http://localhost:3001/serviceSchedule/' + id)
+    const deleteServiceStation = (id) => {
+        axios.delete('http://localhost:3001/station/' + id)
             .then((response) => {
                 console.log(response.data)
-                getServiceSchdule()
+                getServiceStation()
             })
             .catch((error) => {
                 console.log(error)
@@ -49,40 +54,40 @@ const ServiceSchduleDash = () => {
 
     // update function
     const updateRow = (singleData) => {
-        setUpDataServiceSchdule(singleData)
+        setUpDataStation(singleData)
         setUpdateToggler(1)
     }
+
+
 
     return (
         <div>
             <div className='container w-100'>
-
                 <br />
+
 
                 {toggler === 1 &&
                     <div>
                         <button className='btn btn-primary' onClick={toggleForm}>Show data</button>
-                        <ServiceAddForm getServiceSchdule={getServiceSchdule} setToggler={setToggler} />
+                        <StationAddForm getServiceStation={getServiceStation} setToggler={setToggler} />
                     </div>}
                 {updateToggler === 1 &&
                     <div>
                         <button className='btn btn-primary' onClick={() => { setUpdateToggler(0) }}>Show data</button>
-                        <ServiceUpdateForm
-                            getServiceSchdule={getServiceSchdule}
+                        <StationUpdateForm
+                            getServiceStation={getServiceStation}
                             setUpdateToggler={setUpdateToggler}
-                            upDataServiceSchdule={upDataServiceSchdule} />
+                            upDataServiceSchdule={updateStation} />
                     </div>}
-
                 {(!toggler && !updateToggler) ?
                     <div>
-                        <h2><b><u>Pending Client Request</u></b></h2><br />
-                        <table className="table text-light blur-card" >
+                        <button className='btn btn-warning' onClick={toggleForm}>Add Service Station</button><br /><br /><br />
+                        <table className="table text-light blur-card">
                             <thead>
                                 <tr>
-                                    <th scope="col">Client Name</th>
-                                    <th scope="col">Client Mobile No</th>
-                                    <th scope="col">Service Station</th>
-                                    <th scope="col">Schedule Time</th>
+                                    <th scope="col">Service Station Name</th>
+                                    <th scope="col">Hotline Number</th>
+                                    <th scope="col">Email Address</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -90,12 +95,11 @@ const ServiceSchduleDash = () => {
                             <tbody>
                                 {data.map((item) =>
                                     <tr key={item._id}>
-                                        <td>{item.clientName}</td>
-                                        <td>{item.clientMobileNo}</td>
-                                        <td>{item.serviceStation}</td>
-                                        <td>{item.scheduleTime}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.mobile}</td>
+                                        <td>{item.email}</td>
                                         <td>
-                                            <button type="button" className="btn btn-danger" onClick={() => deleteServiceSchdule(item._id)}>Delete</button>
+                                            <button type="button" className="btn btn-danger" onClick={() => deleteServiceStation(item._id)}>Delete</button>
                                         </td>
                                         <td>
                                             <button className="btn btn-primary" onClick={() => { updateRow(item) }}>
@@ -114,4 +118,4 @@ const ServiceSchduleDash = () => {
     );
 };
 
-export default ServiceSchduleDash;
+export default ServiceStation;

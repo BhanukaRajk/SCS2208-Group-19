@@ -12,6 +12,8 @@ import passport from "./passport.js";
 import session from "express-session";
 import userRouter from "./routes/userRouter.js";
 
+import station from "./routes/stationRouter.js";
+
 dotenv.config();
 const username = process.env.DB_USERNAME || "admin";
 const passwd = process.env.DB_PASSWORD || "1234567890";
@@ -39,6 +41,7 @@ app.use("/mechanic", mechanic);
 app.use("/admin", admin);
 app.use("/serviceSchedule", serviceSchedule);
 app.use("/auth", userRouter);
+app.use("/station", station);
 
 const CONNECTION_url = `mongodb+srv://${username}:${passwd}@cluster0.tfcjplj.mongodb.net/?retryWrites=true&w=majority`;
 

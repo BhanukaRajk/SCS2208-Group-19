@@ -1,30 +1,34 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AdminClientDashboard from "./components/admin/ClientDashboard";
+import MechanicDash from './components/admin/MechanicDash';
 import { useMemo, useState } from "react";
 import CheckRequests from "./components/repairs/CheckRequests";
-import AdminClientDashboard from "./components/admin/ClientDashboard";
-import MechanicDash from "./components/admin/MechanicDash";
 import MyTasks from "./components/repairs/MyTasks";
 import MyRequests from "./components/repairs/MyRequests";
-
 import AddRequest from "./components/repairs/AddRequest";
-import ServiceSchduleDash from "./components/serviceSchdule/ServiceSchduleDash";
-import HomePage from "./components/Home/HomePage";
-import Login from "./components/login/Login";
-import Register from "./components/register/Register";
+
+
+import HomePage from './components/Home/HomePage';
+import Login from './components/login/Login';
+import Register from './components/register/Register';
 import Navbar from "./components/Home/Navbar";
-import MechanicDashboard from "./components/dashboards/MechanicDashboard";
-import ClientDashboard from "./components/dashboards/ClientDashboard";
-import AdminDashboard from "./components/dashboards/AdminDashboard";
+import MechanicDashboard from './components/dashboards/MechanicDashboard';
+import ClientDashboard from './components/dashboards/ClientDashboard';
+import AdminDashboard from './components/dashboards/AdminDashboard';
+import ClientServiceScduleAdd from "./components/serviceSchdule/ClientServiceScduleAdd";
+import ServiceStationSchduleView from "./components/serviceSchdule/ServiceStationSchduleView";
+import ServiceStation from './components/station/ServiceStation'
+import ServiceSchduleDash from "./components/serviceSchdule/ServiceSchduleDash";
 import MechanicAddForm from "./components/admin/MechanicAddForm";
 import {UserContext} from './UserContext';
-import ClientServiceScduleAdd from "./components/serviceSchdule//ClientServiceScduleAdd";
-import ServiceStationSchduleView from "./components/serviceSchdule//ServiceStationSchduleView";
+
 
 
 function App() {
     const [user, setUser] = useState({email:"",type:""});
+
 
     return (
         <BrowserRouter>
@@ -46,6 +50,7 @@ function App() {
                     <Route path="/ClientServiceScduleAdd" element={<ClientServiceScduleAdd />}/>
 				            <Route path="/ServiceStationSchduleView" element={<ServiceStationSchduleView />} />
                     <Route path="/admin/client" element={<AdminClientDashboard />}/>
+                    <Route path="/station" element={<ServiceStation />} />
                 </Routes>
             </UserContext.Provider>
             </BrowserRouter>

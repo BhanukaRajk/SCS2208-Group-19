@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './serviceSchdule.css'
 
 const ServiceSchduleDash = () => {
 
@@ -81,9 +80,6 @@ const ServiceSchduleDash = () => {
             })
     }
 
-
-    // states for form
-    // const [name, setName] = useState(upData.name)
 
 
 

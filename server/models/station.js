@@ -17,15 +17,10 @@ const stationSchema = mongoose.Schema({
     email : String,
 
     // ADDRESS OF THE SERVICE STATION
-    address : {
-        // NUMBER, STREET NAME AND TOWN
-        number : String,
-        street : String,
-        town : String
-    }
 
 });
 
-const station = mongoose.model('repair', stationSchema);
+const station = mongoose.model('station', stationSchema);
+
 
 export default station;

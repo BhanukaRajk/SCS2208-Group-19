@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import './serviceSchdule.css'
 import ServiceAddForm from './ServiceAddForm';
 import ServiceUpdateForm from './ServiceUpdateForm';
 
@@ -80,9 +79,9 @@ const ServiceSchduleDash = () => {
 
                 {(!toggler && !updateToggler) ?
                     <div>
-                        <button className='btn btn-primary' onClick={toggleForm}>Add Service</button><br /><br /><br />
+                        <button className='btn btn-warning' onClick={toggleForm}>Add Service</button><br /><br /><br />
                         <h2><b><u>Details of My Schedule</u></b></h2><br />
-                        <table className="table">
+                        <table className="table text-light blur-card">
                             <thead>
                                 <tr>
                                     <th scope="col">Client Name</th>
