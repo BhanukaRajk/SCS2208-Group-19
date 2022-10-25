@@ -12,7 +12,7 @@ export const registerUser = (req, res) => {
                 const newUser = new User({
                     email: req.body.username,
                     password: hash,
-                    type : req.body.type
+                    type: req.body.type,
                 });
                 newUser
                     .save()
@@ -29,12 +29,11 @@ export const registerUser = (req, res) => {
     }
 };
 
-export const loginUser = passport.authenticate("local", 
-{
+export const loginUser = passport.authenticate("local", {
     successRedirect: "/auth/success", // redirect to profile if success
     failureRedirect: "/", // redirect back to login if faliure
-}
-);
+});
+
 
 export const logoutUser = (req, res) => {
     // destroy the session data of the user
@@ -49,18 +48,17 @@ export const logoutUser = (req, res) => {
 };
 
 export const successLogin = (req, res) => {
-    res.status(200).send("successfully logged in !")
-}
+    res.status(200).send(`logged in`);
+};
 
-export const getUser = async(req,res) => {
-    try{
+export const getUser = async (req, res) => {
+    try {
         const user = await User.findOne(
             { email: req.params.email },
             { password: 0 }
         );
-        res.status(200).send(user)
-    }catch(err){
-        res.status(404).send("cannot get data !")
+        res.status(200).send(user);
+    } catch (err) {
+        res.status(404).send("cannot get data !");
     }
-
-}
+};

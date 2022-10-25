@@ -1,8 +1,11 @@
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { UserContext } from '../../UserContext'
+import { useContext } from 'react'
 
 const Login = () => {
+  const {user, setUser} = useContext(UserContext);
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -20,7 +23,11 @@ const Login = () => {
           axios.get('http://localhost:3001/auth/get/' + username)
             .then((res) => {
               setType(res.data.type)
-              setMessage(`login successfull - ${res.data.type}`)
+              setUser({
+                email: username,
+                type: res.data.type
+              })
+              setMessage(`login successfull - ${user.type}`)
             })
             .catch(err => {
               console.log(err.message);

@@ -7,19 +7,19 @@ import "./repairs.css";
 
 const clientUpdateReqs = ({ showData, setUpdateToggler, thisOne }) => {
 
-    const [cname, setClientName] = react.useState(thisOne.cname)
-    const [vlocation, setVehicleLocation] = react.useState(thisOne.vlocation)
-    const [mobile, setClientMobileNo] = react.useState(thisOne.mobile)
-    const [model, setVehicleModel] = react.useState(thisOne.model)
+    const [cname, setClientName] = react.useState(thisOne.client_name)
+    const [vlocation, setVehicleLocation] = react.useState(thisOne.location)
+    const [mobile, setClientMobileNo] = react.useState(thisOne.client_mobile)
+    const [model, setVehicleModel] = react.useState(thisOne.vehicle_model)
 
 
     const updateReqData = (event) => {
         event.preventDefault()
         Axios.patch('http://localhost:3001/repair/id/' + thisOne._id, {
-            "Name": cname,
-            "Location": vlocation,
-            "MobileNo": mobile,
-            "Model": model
+            "client_name": cname,
+            "location": vlocation,
+            "client_mobile": mobile,
+            "vehicle_model": model
         })
             .then((res) => {
                 console.log(res.data)

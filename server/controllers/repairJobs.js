@@ -68,3 +68,21 @@ export const completeTask = async (req, res) => {
         res.status(400).send("ERROR! Couldn't delete record -");
     }
 }
+
+export const updateRequest = async (req, res) => {
+    try {
+        const acceptRepair = await repair.findOne({ "_id": req.params.id });
+        Object.assign(acceptRepair, req.body);
+
+        acceptRepair
+            .save()
+            .then(() => {
+                res.send("SUCCESS! Acceptance data saved +");
+            })
+            .catch((error) => {
+                res.send(`ERROR! \nerror code: ${error}`);
+            });
+    } catch (error) {
+        res.status(400).send("ERROR! Couldn't update record -");
+    }
+};
